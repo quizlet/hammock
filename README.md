@@ -404,7 +404,7 @@ Direct usage of internal classes (especially the non-disposable ones) is strongl
 # Contributing
 If you ever wanted to contribute to open source, now is the chance!
 
-Please read [CONTRIBUTING.md](https://github.com/quizlet/hammock/blob/master/CONTRIBUTING.md) for details and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/quizlet/hammock/blob/master/CONTRIBUTING.md) for details and the process for submitting pull requests.
 
 # Versioning
 We use GitHub for versioning. For the versions available, see the [tags on this repository](https://github.com/quizlet/hammock/tags).
@@ -423,7 +423,7 @@ Thanks to the following people who have contributed to this project:
 - Sean Young
 
 # Contact
-Please reach out to tyron.jung@quizlet.com and riya.dashoriya@quizlet.com with any questions.
+Please reach out to tyron.jung@quizlet.com or riya.dashoriya@quizlet.com if you have any questions.
 
 # License
 [MIT](https://github.com/quizlet/hammock/blob/master/README.md)
