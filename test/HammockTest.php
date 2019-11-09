@@ -1,5 +1,7 @@
 <?hh // strict
 
+namespace Hammock;
+
 use Hammock\Exceptions\HammockException;
 use Hammock\Fixtures\{AnotherClass, ChildClass, TestClass};
 use function Facebook\FBExpect\expect;
