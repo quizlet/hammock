@@ -13,7 +13,7 @@ use namespace Hammock\Persistent;
 class PersistentTest {
 	public function setUp(): void {
 		Persistent\deactivate_all_persistent_mocks();
-		expect(Hammock\MockManager::getNumMockKeys())->toBeSame(0);
+		expect(MockManager::getNumMockKeys())->toBeSame(0);
 	}
 
 	public function testClassMethodMock(): void {
@@ -32,7 +32,7 @@ class PersistentTest {
 			$this->mockClassMethod(TestClass::class, 'returnInput');
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked.",
 		);
 	}
 
@@ -51,7 +51,7 @@ class PersistentTest {
 			$this->mockObjectMethod($secondObject, 'returnInput');
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked for this object.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked for this object.",
 		);
 	}
 
@@ -67,7 +67,7 @@ class PersistentTest {
 			$this->mockGlobalFunction();
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
@@ -87,7 +87,7 @@ class PersistentTest {
 			$this->spyClassMethod();
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked.",
 		);
 	}
 
@@ -113,7 +113,7 @@ class PersistentTest {
 			$this->spyObjectMethod($secondObject);
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked for this object.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked for this object.",
 		);
 	}
 
@@ -136,7 +136,7 @@ class PersistentTest {
 			$this->mockGlobalSpyFunction();
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
@@ -150,7 +150,7 @@ class PersistentTest {
 			$this->noopClassMethod();
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::staticReturnInput` has already been mocked.",
+			"The method `Hammock\Fixtures\TestClass::staticReturnInput` has already been mocked.",
 		);
 	}
 
@@ -165,7 +165,7 @@ class PersistentTest {
 			$this->noopObjectMethod($object);
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked for this object.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked for this object.",
 		);
 	}
 
@@ -179,7 +179,7 @@ class PersistentTest {
 			$this->noopGlobalFunction();
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
@@ -197,19 +197,19 @@ class PersistentTest {
 			$this->mockClassMethod(TestClass::class, 'nonexistentMethod');
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::nonexistentMethod` does not exist.",
+			"The method `Hammock\Fixtures\TestClass::nonexistentMethod` does not exist.",
 		);
 	}
 
 	public function testMockNonexistentGlobalFunction(): void {
 		expect(() ==> {
 			Persistent\mock_global_function(
-				'Hammock\Test\Fixtures\nonexistent_global_function',
+				'Hammock\Fixtures\nonexistent_global_function',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\nonexistent_global_function` does not exist.",
+			"The function `Hammock\Fixtures\\nonexistent_global_function` does not exist.",
 		);
 	}
 
@@ -220,7 +220,7 @@ class PersistentTest {
 			TestClass::staticReturnInput(0);
 		})->toThrow(
 			HammockException::class,
-			"The static method `Hammock\Test\Fixtures\TestClass::staticReturnInput` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
+			"The static method `Hammock\Fixtures\TestClass::staticReturnInput` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
 		);
 	}
 
@@ -322,7 +322,7 @@ class PersistentTest {
 			$this->mockClassMethod(ChildClass::class, 'returnInput');
 		})->toThrow(
 			HammockException::class,
-			"Hammock\Test\Fixtures\ChildClass::returnInput` is declared in `Hammock\Test\Fixtures\TestClass`. Please use `Hammock\Test\Fixtures\TestClass::returnInput` instead.",
+			"Hammock\Fixtures\ChildClass::returnInput` is declared in `Hammock\Fixtures\TestClass`. Please use `Hammock\Fixtures\TestClass::returnInput` instead.",
 		);
 	}
 
@@ -342,13 +342,13 @@ class PersistentTest {
 		return Persistent\mock_object_method(
 			$object,
 			$methodName,
-			$args ==> intval($args[0]) ** 2,
+			$args ==> \intval($args[0]) ** 2,
 		);
 	}
 
 	private function mockGlobalFunction(): PersistentFunctionMock {
 		return Persistent\mock_global_function(
-			'Hammock\Test\Fixtures\return_input',
+			'Hammock\Fixtures\return_input',
 			$args ==> 1,
 		);
 	}
@@ -362,7 +362,7 @@ class PersistentTest {
 	}
 
 	private function mockGlobalSpyFunction(): PersistentFunctionMock {
-		return Persistent\spy_global_function('Hammock\Test\Fixtures\return_input');
+		return Persistent\spy_global_function('Hammock\Fixtures\return_input');
 	}
 
 	private function noopClassMethod(): PersistentFunctionMock {
@@ -375,6 +375,6 @@ class PersistentTest {
 
 	private function noopGlobalFunction(): PersistentFunctionMock {
 		return
-			Persistent\noop_global_function('Hammock\Test\Fixtures\return_input');
+			Persistent\noop_global_function('Hammock\Fixtures\return_input');
 	}
 }

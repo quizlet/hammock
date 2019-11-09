@@ -13,7 +13,7 @@ class HammockTest {
 
 		expect($firstObject->returnInput(0))->toBeSame(0);
 
-		using ($classMock = Hammock\mock_class(TestClass::class)) {
+		using ($classMock = mock_class(TestClass::class)) {
 			$methodMock = $classMock->mockMethod('returnInput', $args ==> 1);
 
 			$secondObject = new TestClass();
@@ -34,18 +34,18 @@ class HammockTest {
 		$thirdObject = new TestClass();
 
 		using (
-			$secondObjectMock = Hammock\mock_object($secondObject),
+			$secondObjectMock = mock_object($secondObject),
 
-			$thirdObjectMock = Hammock\mock_object($thirdObject)
+			$thirdObjectMock = mock_object($thirdObject)
 		) {
 			$secondMethodMock = $secondObjectMock->mockMethod(
 				'returnInput',
-				$args ==> intval($args[0]) ** 2,
+				$args ==> \intval($args[0]) ** 2,
 			);
 
 			$thirdMethodMock = $thirdObjectMock->mockMethod(
 				'returnInput',
-				$args ==> intval($args[0]) ** 3,
+				$args ==> \intval($args[0]) ** 3,
 			);
 
 			expect($firstObject->returnInput(2))->toBeSame(2);
@@ -64,7 +64,7 @@ class HammockTest {
 
 	public function testClassMethodMock(): void {
 		using $methodMock =
-			Hammock\mock_class_method(TestClass::class, 'returnInput', $args ==> 1);
+			mock_class_method(TestClass::class, 'returnInput', $args ==> 1);
 
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
@@ -80,10 +80,10 @@ class HammockTest {
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
 
-		using $methodMock = Hammock\mock_object_method(
+		using $methodMock = mock_object_method(
 			$secondObject,
 			'returnInput',
-			$args ==> intval($args[0]) ** 2,
+			$args ==> \intval($args[0]) ** 2,
 		);
 
 		expect($firstObject->returnInput(2))->toBeSame(2);
@@ -96,8 +96,8 @@ class HammockTest {
 		expect(return_input(0))->toBeSame(0);
 
 		using (
-			$functionMock = Hammock\mock_global_function(
-				'Hammock\Test\Fixtures\return_input',
+			$functionMock = mock_global_function(
+				'Hammock\Fixtures\return_input',
 				$args ==> 1,
 			)
 		) {
@@ -110,7 +110,7 @@ class HammockTest {
 	}
 
 	public function testClassMethodSpy(): void {
-		using ($classMock = Hammock\mock_class(TestClass::class)) {
+		using ($classMock = mock_class(TestClass::class)) {
 			$methodSpy = $classMock->spyMethod('returnInput');
 
 			$firstObject = new TestClass();
@@ -125,7 +125,7 @@ class HammockTest {
 
 		// Shortcut.
 		using $methodSpy =
-			Hammock\spy_class_method(TestClass::class, 'returnInput');
+			spy_class_method(TestClass::class, 'returnInput');
 
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
@@ -141,7 +141,7 @@ class HammockTest {
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
 
-		using ($firstObjectMock = Hammock\mock_object($firstObject)) {
+		using ($firstObjectMock = mock_object($firstObject)) {
 			$methodSpy = $firstObjectMock->spyMethod('returnInput');
 
 			$n = 5;
@@ -159,7 +159,7 @@ class HammockTest {
 		}
 
 		// Shortcut.
-		using $methodSpy = Hammock\spy_object_method($secondObject, 'returnInput');
+		using $methodSpy = spy_object_method($secondObject, 'returnInput');
 
 		$n = 5;
 
@@ -177,7 +177,7 @@ class HammockTest {
 
 	public function testGlobalFunctionSpy(): void {
 		using $functionSpy =
-			Hammock\spy_global_function('Hammock\Test\Fixtures\return_input');
+			spy_global_function('Hammock\Fixtures\return_input');
 
 		$n = 5;
 
@@ -202,10 +202,10 @@ class HammockTest {
 		$object = new TestClass();
 
 		using $protectedMethodMock =
-			Hammock\mock_object_method($object, 'protectedReturnInput', $args ==> 1);
+			mock_object_method($object, 'protectedReturnInput', $args ==> 1);
 
 		using $privateMethodSpy =
-			Hammock\spy_object_method($object, 'privateReturnInput');
+			spy_object_method($object, 'privateReturnInput');
 
 		expect($object->publicReturnInput(0))->toBeSame(1);
 		expect($protectedMethodMock->getNumCalls())->toBeSame(1);
@@ -216,21 +216,21 @@ class HammockTest {
 		$object = new TestClass();
 
 		using $privateMethodMock =
-			Hammock\mock_object_method($object, 'privateReturnInput', $args ==> 1);
+			mock_object_method($object, 'privateReturnInput', $args ==> 1);
 
 		expect($object->publicReturnInput(0))->toBeSame(1);
 		expect($privateMethodMock->getNumCalls())->toBeSame(1);
 	}
 
 	public function testMockStaticMethod(): void {
-		using $staticMethodMock = Hammock\mock_class_method(
+		using $staticMethodMock = mock_class_method(
 			TestClass::class,
 			'staticReturnInput',
 			$args ==> 1,
 		);
 
 		using $publicMethodSpy =
-			Hammock\spy_class_method(TestClass::class, 'publicReturnInput');
+			spy_class_method(TestClass::class, 'publicReturnInput');
 
 		expect(TestClass::staticReturnInput(0))->toBeSame(1);
 		expect($staticMethodMock->getNumCalls())->toBeSame(1);
@@ -243,7 +243,7 @@ class HammockTest {
 		$object = new TestClass();
 		$childObject = new ChildClass();
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'returnInput',
 			$args ==> 1,
@@ -252,7 +252,7 @@ class HammockTest {
 		expect($object->returnInput(0))->toBeSame(1);
 		expect($childObject->returnInput(0))->toBeSame(1);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'overriddenReturnInput',
 			$args ==> 1,
@@ -263,7 +263,7 @@ class HammockTest {
 	}
 
 	public function testMockParentClassStaticMethod(): void {
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'staticReturnInput',
 			$args ==> 1,
@@ -272,7 +272,7 @@ class HammockTest {
 		expect(TestClass::staticReturnInput(0))->toBeSame(1);
 		expect(ChildClass::staticReturnInput(0))->toBeSame(1);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'overriddenStaticReturnInput',
 			$args ==> 1,
@@ -281,7 +281,7 @@ class HammockTest {
 		expect(TestClass::overriddenStaticReturnInput(0))->toBeSame(1);
 		expect(ChildClass::overriddenStaticReturnInput(0))->toBeSame(0);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			ChildClass::class,
 			'overriddenStaticReturnInput',
 			$args ==> 2,
@@ -294,21 +294,21 @@ class HammockTest {
 	public function testMockParentObjectMethod(): void {
 		$childObject = new ChildClass();
 
-		using Hammock\mock_object_method($childObject, 'returnInput', $args ==> 1);
+		using mock_object_method($childObject, 'returnInput', $args ==> 1);
 
 		expect($childObject->returnInput(0))->toBeSame(1);
 
 		// NOTE: Mocking an object method that is declared in the parent
 		// class will automatically mock the parent class method.
 		expect(() ==> {
-			using Hammock\mock_class_method(
+			using mock_class_method(
 				TestClass::class,
 				'returnInput',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked.",
 		);
 	}
 
@@ -317,7 +317,7 @@ class HammockTest {
 	public function testMockTraitMethod(): void {
 		expect(TestClass::traitStaticReturnInput(0))->toBeSame(0);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'traitStaticReturnInput',
 			$args ==> 1,
@@ -330,13 +330,13 @@ class HammockTest {
 		expect(TestClass::staticReturnInput(0))->toBeSame(0);
 		expect(AnotherClass::anotherStaticReturnInput(0))->toBeSame(0);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'staticReturnInput',
 			$args ==> 1,
 		);
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			AnotherClass::class,
 			'anotherStaticReturnInput',
 			$args ==> 2,
@@ -353,9 +353,9 @@ class HammockTest {
 		expect($object->returnInput(0))->toBeSame(0);
 		expect($anotherObject->anotherReturnInput(0))->toBeSame(0);
 
-		using Hammock\mock_object_method($object, 'returnInput', $args ==> 1);
+		using mock_object_method($object, 'returnInput', $args ==> 1);
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$anotherObject,
 			'anotherReturnInput',
 			$args ==> 2,
@@ -368,12 +368,12 @@ class HammockTest {
 	public function testMockFunctionWithMultipleArgs(): void {
 		expect(return_inputs(1, 2, 3))->toBeSame(tuple(1, 2, 3));
 
-		using $functionMock = Hammock\mock_global_function(
-			'Hammock\Test\Fixtures\return_inputs',
+		using $functionMock = mock_global_function(
+			'Hammock\Fixtures\return_inputs',
 			($args) ==> tuple(
-				intval($args[0]) ** 1,
-				intval($args[1]) ** 2,
-				intval($args[2]) ** 3,
+				\intval($args[0]) ** 1,
+				\intval($args[1]) ** 2,
+				\intval($args[2]) ** 3,
 			),
 		);
 
@@ -382,7 +382,7 @@ class HammockTest {
 	}
 
 	public function testNoopClassMethod(): void {
-		using ($classMock = Hammock\mock_class(TestClass::class)) {
+		using ($classMock = mock_class(TestClass::class)) {
 			$methodNoop = $classMock->noopMethod('staticReturnInput');
 
 			expect(TestClass::staticReturnInput(0))->toBeNull();
@@ -393,7 +393,7 @@ class HammockTest {
 
 		// Shortcut.
 		using $methodNoop =
-			Hammock\noop_class_method(TestClass::class, 'staticReturnInput');
+			noop_class_method(TestClass::class, 'staticReturnInput');
 
 		expect(TestClass::staticReturnInput(0))->toBeNull();
 		expect($methodNoop->getNumCalls())->toBeSame(1);
@@ -402,7 +402,7 @@ class HammockTest {
 	public function testNoopObjectMethod(): void {
 		$object = new TestClass();
 
-		using ($objectMock = Hammock\mock_object($object)) {
+		using ($objectMock = mock_object($object)) {
 			$methodNoop = $objectMock->noopMethod('returnInput');
 
 			expect($object->returnInput(0))->toBeNull();
@@ -410,7 +410,7 @@ class HammockTest {
 		}
 
 		// Shortcut.
-		using $methodNoop = Hammock\noop_object_method($object, 'returnInput');
+		using $methodNoop = noop_object_method($object, 'returnInput');
 
 		expect($object->returnInput(0))->toBeNull();
 		expect($methodNoop->getNumCalls())->toBeSame(1);
@@ -418,7 +418,7 @@ class HammockTest {
 
 	public function testNoopGlobalFunction(): void {
 		using $functionNoop =
-			Hammock\noop_global_function('Hammock\Test\Fixtures\return_input');
+			noop_global_function('Hammock\Fixtures\return_input');
 
 		expect(return_input(0))->toBeNull();
 		expect($functionNoop->getNumCalls())->toBeSame(1);
@@ -428,13 +428,13 @@ class HammockTest {
 
 	public function testMockAlreadyMockedMethod(): void {
 		expect(() ==> {
-			using $classMock = Hammock\mock_class(TestClass::class);
+			using $classMock = mock_class(TestClass::class);
 
 			$classMock->mockMethod('staticReturnInput', $args ==> 1);
 			$classMock->mockMethod('staticReturnInput', $args ==> 1);
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::staticReturnInput` has already been mocked.",
+			"The method `Hammock\Fixtures\TestClass::staticReturnInput` has already been mocked.",
 		);
 	}
 
@@ -442,13 +442,13 @@ class HammockTest {
 		expect(() ==> {
 			$object = new TestClass();
 
-			using $objectMock = Hammock\mock_object($object);
+			using $objectMock = mock_object($object);
 
 			$objectMock->spyMethod('returnInput');
 			$objectMock->spyMethod('returnInput');
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` has already been mocked for this object.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` has already been mocked for this object.",
 		);
 	}
 
@@ -456,76 +456,76 @@ class HammockTest {
 		expect(() ==> {
 			$object = new TestClass();
 
-			using $classMock = Hammock\mock_class(TestClass::class);
-			using $objectMock = Hammock\mock_object($object);
+			using $classMock = mock_class(TestClass::class);
+			using $objectMock = mock_object($object);
 
 			$classMock->noopMethod('returnInput');
 			$objectMock->noopMethod('returnInput');
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::returnInput` already has a class-level mock.",
+			"The method `Hammock\Fixtures\TestClass::returnInput` already has a class-level mock.",
 		);
 	}
 
 	public function testMockAlreadyMockedGlobalFunction(): void {
 		expect(() ==> {
-			using Hammock\mock_global_function(
-				'Hammock\Test\Fixtures\return_input',
+			using mock_global_function(
+				'Hammock\Fixtures\return_input',
 				$args ==> 1,
 			);
 
-			using Hammock\mock_global_function(
-				'Hammock\Test\Fixtures\return_input',
+			using mock_global_function(
+				'Hammock\Fixtures\return_input',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
 	public function testSpyAlreadyMockedGlobalFunction(): void {
 		expect(() ==> {
-			using Hammock\spy_global_function('Hammock\Test\Fixtures\return_input');
-			using Hammock\spy_global_function('Hammock\Test\Fixtures\return_input');
+			using spy_global_function('Hammock\Fixtures\return_input');
+			using spy_global_function('Hammock\Fixtures\return_input');
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
 	public function testNoopAlreadyMockedGlobalFunction(): void {
 		expect(() ==> {
-			using Hammock\noop_global_function('Hammock\Test\Fixtures\return_input');
-			using Hammock\noop_global_function('Hammock\Test\Fixtures\return_input');
+			using noop_global_function('Hammock\Fixtures\return_input');
+			using noop_global_function('Hammock\Fixtures\return_input');
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\return_input` has already been mocked.",
+			"The function `Hammock\Fixtures\\return_input` has already been mocked.",
 		);
 	}
 
 	public function testMockNonexistentMethod(): void {
 		expect(() ==> {
-			using Hammock\mock_class_method(
+			using mock_class_method(
 				TestClass::class,
 				'nonexistentMethod',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"The method `Hammock\Test\Fixtures\TestClass::nonexistentMethod` does not exist.",
+			"The method `Hammock\Fixtures\TestClass::nonexistentMethod` does not exist.",
 		);
 	}
 
 	public function testMockNonexistentGlobalFunction(): void {
 		expect(() ==> {
-			using Hammock\mock_global_function(
-				'Hammock\Test\Fixtures\nonexistent_global_function',
+			using mock_global_function(
+				'Hammock\Fixtures\nonexistent_global_function',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"The function `Hammock\Test\Fixtures\\nonexistent_global_function` does not exist.",
+			"The function `Hammock\Fixtures\\nonexistent_global_function` does not exist.",
 		);
 	}
 
@@ -533,7 +533,7 @@ class HammockTest {
 		expect(() ==> {
 			$object = new TestClass();
 
-			using Hammock\mock_object_method(
+			using mock_object_method(
 				$object,
 				'staticReturnInput',
 				$args ==> 1,
@@ -542,13 +542,13 @@ class HammockTest {
 			TestClass::staticReturnInput(0);
 		})->toThrow(
 			HammockException::class,
-			"The static method `Hammock\Test\Fixtures\TestClass::staticReturnInput` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
+			"The static method `Hammock\Fixtures\TestClass::staticReturnInput` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
 		);
 	}
 
 	public function testMockPrimitive(): void {
 		expect(() ==> {
-			using Hammock\mock_object_method(0, 'returnInput', $args ==> 1);
+			using mock_object_method(0, 'returnInput', $args ==> 1);
 		})->toThrow(
 			HammockException::class,
 			"The method `returnInput` cannot be resolved for a non-object.",
@@ -557,7 +557,7 @@ class HammockTest {
 
 	public function testGetUnmockedMethod(): void {
 		expect(() ==> {
-			using $classMock = Hammock\mock_class(TestClass::class);
+			using $classMock = mock_class(TestClass::class);
 
 			$classMock->getMethodMock('staticReturnInput');
 		})->toThrow(
@@ -568,7 +568,7 @@ class HammockTest {
 
 	public function testGetArgsForCallOutOfIndex(): void {
 		expect(() ==> {
-			using $methodMock = Hammock\mock_class_method(
+			using $methodMock = mock_class_method(
 				TestClass::class,
 				'staticReturnInput',
 				$args ==> 1,
@@ -587,25 +587,25 @@ class HammockTest {
 
 	public function testMockMethodDefinedInParentClass(): void {
 		expect(() ==> {
-			using Hammock\mock_class_method(
+			using mock_class_method(
 				ChildClass::class,
 				'returnInput',
 				$args ==> 1,
 			);
 		})->toThrow(
 			HammockException::class,
-			"Hammock\Test\Fixtures\ChildClass::returnInput` is declared in `Hammock\Test\Fixtures\TestClass`. Please use `Hammock\Test\Fixtures\TestClass::returnInput` instead.",
+			"Hammock\Fixtures\ChildClass::returnInput` is declared in `Hammock\Fixtures\TestClass`. Please use `Hammock\Fixtures\TestClass::returnInput` instead.",
 		);
 	}
 
 	public function testThisWithClassMethodMock(): void {
 		$object = new TestClass();
 
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'returnInput',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($object);
+				expect(this())->toBeSame($object);
 
 				return 1;
 			},
@@ -614,14 +614,14 @@ class HammockTest {
 		$exceptionMessage =
 			"The current object may only be accessed during the execution of an instance method mock callback.";
 
-		expect(() ==> Hammock\this())->toThrow(
+		expect(() ==> this())->toThrow(
 			HammockException::class,
 			$exceptionMessage,
 		);
 
 		expect($object->returnInput(0))->toBeSame(1);
 
-		expect(() ==> Hammock\this())->toThrow(
+		expect(() ==> this())->toThrow(
 			HammockException::class,
 			$exceptionMessage,
 		);
@@ -631,70 +631,70 @@ class HammockTest {
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$firstObject,
 			'returnInput',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($firstObject);
+				expect(this())->toBeSame($firstObject);
 
 				// Test nested object method mocks.
 				expect($secondObject->returnInput(0))->toBeSame(1);
 
-				expect(Hammock\this())->toBeSame($firstObject);
+				expect(this())->toBeSame($firstObject);
 
 				return 1;
 			},
 		);
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$secondObject,
 			'returnInput',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($secondObject);
+				expect(this())->toBeSame($secondObject);
 
 				return 1;
 			},
 		);
 
-		expect(() ==> Hammock\this())->toThrow(HammockException::class);
+		expect(() ==> this())->toThrow(HammockException::class);
 		expect($firstObject->returnInput(0))->toBeSame(1);
-		expect(() ==> Hammock\this())->toThrow(HammockException::class);
+		expect(() ==> this())->toThrow(HammockException::class);
 		expect($secondObject->returnInput(0))->toBeSame(1);
-		expect(() ==> Hammock\this())->toThrow(HammockException::class);
+		expect(() ==> this())->toThrow(HammockException::class);
 	}
 
 	public function testThisWithFluentMethodMock(): void {
 		$object = new TestClass();
 
-		using $methodMock = Hammock\mock_object_method(
+		using $methodMock = mock_object_method(
 			$object,
 			'returnThis',
 			$args ==> {
-				return Hammock\this();
+				return this();
 			},
 		);
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$object,
 			'returnInput',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($object);
+				expect(this())->toBeSame($object);
 
 				return 1;
 			},
 		);
 
-		expect(() ==> Hammock\this())->toThrow(HammockException::class);
+		expect(() ==> this())->toThrow(HammockException::class);
 		expect($object->returnThis()->returnInput(0))->toBeSame(1);
-		expect(() ==> Hammock\this())->toThrow(HammockException::class);
+		expect(() ==> this())->toThrow(HammockException::class);
 		expect($methodMock->getNumCalls())->toBeSame(1);
 	}
 
 	public function testThisWithGlobalFunctionMock(): void {
-		using Hammock\mock_global_function(
-			'Hammock\Test\Fixtures\return_input',
+		using mock_global_function(
+			'Hammock\Fixtures\return_input',
 			$args ==> {
-				expect(() ==> Hammock\this())->toThrow(
+				expect(() ==> this())->toThrow(
 					HammockException::class,
 					"The current object may only be accessed during the execution of an instance method mock callback.",
 				);
@@ -707,11 +707,11 @@ class HammockTest {
 	}
 
 	public function testThisWithStaticMethodMock(): void {
-		using Hammock\mock_class_method(
+		using mock_class_method(
 			TestClass::class,
 			'staticReturnInput',
 			$args ==> {
-				expect(() ==> Hammock\this())->toThrow(
+				expect(() ==> this())->toThrow(
 					HammockException::class,
 					"The current object may only be accessed during the execution of an instance method mock callback.",
 				);
@@ -728,46 +728,46 @@ class HammockTest {
 		$secondObject = new TestClass();
 		$thirdObject = new TestClass();
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$firstObject,
 			'returnInput',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($firstObject);
+				expect(this())->toBeSame($firstObject);
 
-				$that = Hammock\this();
+				$that = this();
 
 				expect(
 					$secondObject->returnCallbackResult(() ==> {
 						// NOTE: This is where the behaviors of
 						// `Hammock\this()` and `$this` differ.
-						expect(Hammock\this())->toBeSame($secondObject);
+						expect(this())->toBeSame($secondObject);
 						expect($that)->toBeSame($firstObject);
 
 						return 1;
 					}),
 				)->toBeSame(2);
 
-				expect(Hammock\this())->toBeSame($firstObject);
+				expect(this())->toBeSame($firstObject);
 
 				expect(
 					$thirdObject->returnCallbackResult(() ==> {
-						expect(Hammock\this())->toBeSame($firstObject);
+						expect(this())->toBeSame($firstObject);
 
 						return 1;
 					}),
 				)->toBeSame(1);
 
-				expect(Hammock\this())->toBeSame($firstObject);
+				expect(this())->toBeSame($firstObject);
 
 				return 1;
 			},
 		);
 
-		using Hammock\mock_object_method(
+		using mock_object_method(
 			$secondObject,
 			'returnCallbackResult',
 			$args ==> {
-				expect(Hammock\this())->toBeSame($secondObject);
+				expect(this())->toBeSame($secondObject);
 
 				/* HH_IGNORE_ERROR[4009] */
 				return $args[0]() * 2;
@@ -779,7 +779,7 @@ class HammockTest {
 
 	public function testMockNullObject(): void {
 		expect(() ==> {
-			using $objectMock = Hammock\mock_object(null);
+			using $objectMock = mock_object(null);
 
 			$objectMock->mockMethod('returnInput', $args ==> 1);
 		})->toThrow(
@@ -788,7 +788,7 @@ class HammockTest {
 		);
 
 		expect(() ==> {
-			using Hammock\mock_object_method(null, 'returnInput', $args ==> 1);
+			using mock_object_method(null, 'returnInput', $args ==> 1);
 		})->toThrow(
 			HammockException::class,
 			"The method `returnInput` cannot be resolved for `null`.",
@@ -796,11 +796,11 @@ class HammockTest {
 	}
 
 	public function tearDown(): void {
-		expect(() ==> Hammock\this())->toThrow(
+		expect(() ==> this())->toThrow(
 			HammockException::class,
 			"The current object may only be accessed during the execution of an instance method mock callback.",
 		);
 
-		expect(Hammock\MockManager::getNumMockKeys())->toBeSame(0);
+		expect(MockManager::getNumMockKeys())->toBeSame(0);
 	}
 }
