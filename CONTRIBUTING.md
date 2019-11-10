@@ -8,4 +8,4 @@ We welcome all sorts of contributions. Please first discuss the change you wish 
 3. Update [README.md](https://github.com/quizlet/hammock/blob/master/README.md) with the details of your changes.
 4. Send a Pull Request to the `master` branch.
 
-Any code you contribute must also follow the [MIT license](https://github.com/quizlet/hammock/blob/master/README.md).
+Any code you contribute must also follow the [MIT license](https://github.com/quizlet/hammock/blob/master/LICENSE).
