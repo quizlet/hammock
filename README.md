@@ -420,10 +420,10 @@ Thanks to the following people who have contributed to this project:
 
 # Acknowledgements
 - [Turadg Aleahmad](https://github.com/turadg)
-- Sean Young
+- [Sean Young](https://github.com/syoung-quizlet)
 
 # Contact
 Please reach out to tyron.jung@quizlet.com or riya.dashoriya@quizlet.com if you have any questions.
 
 # License
-[MIT](https://github.com/quizlet/hammock/blob/master/README.md)
+[MIT](https://github.com/quizlet/hammock/blob/master/LICENSE)
