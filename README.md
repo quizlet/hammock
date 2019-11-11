@@ -8,15 +8,17 @@ Hammock also distinguishes between _class-level_ mocks and _object-level_ mocks.
 
 By virtue of using `fb_intercept`, Hammock is able to override the behavior of functions at runtime. This eliminates the need for dependency injection when mocking objects. That is, rather than creating a mock object that looks and feels the same as a real object, Hammock creates a mock object that _accompanies_ the real object. For the lifespan of the mock object (which ends at the end of the block), the real object's behavior is overridden.
 
+# Installation
+
+To install Hammock, run the command below
+
+```
+composer require --dev quizlet/hammock
+```
+
 # Examples
 
 If you learn better by reading the API documentation instead of going through examples, you can jump straight to the [API](#api) section.
-
-## Namespace
-
-```hack
-use namespace Hammock;
-```
 
 ## Mocks
 
@@ -398,3 +400,30 @@ function helper(): Hammock\Disposables\FunctionMock {
 # Warning
 
 Direct usage of internal classes (especially the non-disposable ones) is strongly discouraged.
+
+# Contributing
+If you ever wanted to contribute to open source, now is the chance!
+
+Please read [CONTRIBUTING.md](https://github.com/quizlet/hammock/blob/master/CONTRIBUTING.md) for details and the process for submitting pull requests.
+
+# Versioning
+We use GitHub for versioning. For the versions available, see the [tags on this repository](https://github.com/quizlet/hammock/tags).
+
+# Contributors
+Thanks to the following people who have contributed to this project:
+- [Tyron Jung](https://github.com/tyronjung-quizlet)
+- [Riya Dashoriya](https://github.com/riyadashoriya-qz)
+- [Karoun Kasraie](https://github.com/karoun)
+- [Andrew Sutherland](https://github.com/asuth)
+- [Josh Rai](https://github.com/joshrai)
+- [Shaobo Sun](https://github.com/shaobos)
+
+# Acknowledgements
+- [Turadg Aleahmad](https://github.com/turadg)
+- [Sean Young](https://github.com/syoung-quizlet)
+
+# Contact
+Please reach out to tyron.jung@quizlet.com or riya.dashoriya@quizlet.com if you have any questions.
+
+# License
+[MIT](https://github.com/quizlet/hammock/blob/master/LICENSE)
