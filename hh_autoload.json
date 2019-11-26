@@ -1,11 +1,11 @@
 {
     "roots": [
-        "src/",
-        "vendor/composer/facebook/",
-        "vendor/composer/hhvm/"
+        "src/"
     ],
     "devRoots": [
         "tests/",
+        "vendor/composer/facebook/",
+        "vendor/composer/hhvm/",
         "vendor/composer/phpunit/",
         "vendor/composer/sebastian/exporter/"
     ],
