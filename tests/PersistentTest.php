@@ -12,6 +12,7 @@ use function Hammock\Fixtures\{return_input, return_inputs};
 use namespace Hammock\Persistent;
 
 class PersistentTest extends HackTest {
+	<<__Override>>
 	public async function beforeEachTestAsync(): Awaitable<void> {
 		Persistent\deactivate_all_persistent_mocks();
 		expect(MockManager::getNumMockKeys())->toBeSame(0);

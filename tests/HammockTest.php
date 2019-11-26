@@ -796,6 +796,7 @@ class HammockTest extends HackTest {
 		);
 	}
 
+	<<__Override>>
 	public async function afterEachTestAsync(): Awaitable<void> {
 		expect(() ==> this())->toThrow(
 			HammockException::class,
