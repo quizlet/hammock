@@ -2,12 +2,13 @@
 
 namespace Hammock;
 
+use Facebook\HackTest\HackTest;
 use Hammock\Exceptions\HammockException;
 use Hammock\Fixtures\{AnotherClass, ChildClass, TestClass};
 use function Facebook\FBExpect\expect;
 use function Hammock\Fixtures\{return_input, return_inputs};
 
-class HammockTest {
+class HammockTest extends HackTest {
 	public function testClassMock(): void {
 		$firstObject = new TestClass();
 
@@ -795,7 +796,7 @@ class HammockTest {
 		);
 	}
 
-	public function tearDown(): void {
+	public async function afterEachTestAsync(): Awaitable<void> {
 		expect(() ==> this())->toThrow(
 			HammockException::class,
 			"The current object may only be accessed during the execution of an instance method mock callback.",
