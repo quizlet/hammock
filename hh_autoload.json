@@ -1,5 +1,13 @@
 {
-    "roots": ["src/"],
-    "devRoots": ["test/"],
+    "roots": [
+        "src/"
+    ],
+    "devRoots": [
+        "tests/",
+        "vendor/composer/facebook/",
+        "vendor/composer/hhvm/",
+        "vendor/composer/phpunit/",
+        "vendor/composer/sebastian/exporter/"
+    ],
     "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
