@@ -1,0 +1,5 @@
+{
+  "roots": [ "src/", "tests/" ],
+  "builtinLinters": "all",
+  "disableAllAutoFixes": true
+}

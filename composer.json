@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "facebook/fbexpect": "1.1",
-        "hhvm/hacktest": "1.2"
+        "hhvm/hacktest": "1.2",
+        "hhvm/hhast": "^3.27"
     }
 }
