@@ -14,7 +14,7 @@ Fatal error: Uncaught Error: Class undefined: Facebook\AutoloadMap\IncludedRoots
 Composer requires two versions of the hsl and hsl-experimental that both define SecureRandom.
 Delete the file in /vendor/hhvm/hsl-experimetal/src/random/\*.php
 
-In vendor/hhvm/hhast/src/__Private/LintRun.php
+In vendor/hhvm/hhast/src/\_\_Private/LintRun.php
 HHAST checks the truthyness of a traversable, vec($errors) first on line 105, like so.
 ```
 $errors = await $linter->getLintErrorsAsync();
@@ -22,7 +22,7 @@ $errors = vec($errors);
 ```
 
 In vendor/facebook/fbexpect/src/ExpectObj.php
-fbexpect toBePHPEqualWithNANEqual uses is_float, instead of `is float`, so is_nan() is a type error, use `is float` on line 83, like so.
+fbexpect toBePHPEqualWithNANEqual uses is\_float, instead of `is float`, so is\_nan() is a type error, use `is float` on line 83, like so.
 ```
 is_float($expected) &&
 $actual is float &&
@@ -33,7 +33,7 @@ $actual is float &&
 ### Runtime
 
 In vendor/hhvm/hhast/src/SchemaVersionError.php
-HHAST divides your HHVM_VERSION_ID by 10000 and 100 using `as int`.
+HHAST divides your HHVM\_VERSION\_ID by 10000 and 100 using `as int`.
 Use `\intdiv()` or `Math\int_div()` like so.
 ```
 "AST version mismatch: expected '%s' (%d.%d.%d), but got '%s",
