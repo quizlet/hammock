@@ -2,9 +2,9 @@
 
 namespace Hammock;
 
-use Facebook\HackTest\HackTest;
-use Hammock\Exceptions\HammockException;
-use Hammock\Fixtures\{AnotherClass, ChildClass, TestClass};
+use type Facebook\HackTest\HackTest;
+use type Hammock\Exceptions\HammockException;
+use type Hammock\Fixtures\{AnotherClass, ChildClass, TestClass};
 use function Facebook\FBExpect\expect;
 use function Hammock\Fixtures\{return_input, return_inputs};
 

@@ -8,7 +8,7 @@
 
 namespace Hammock;
 
-use Hammock\Exceptions\{HammockException, PassThroughException};
+use type Hammock\Exceptions\{HammockException, PassThroughException};
 use function Hammock\get_declaring_class_name;
 use namespace HH\Lib\{C, Dict, Str, Vec};
 use type Hammock\{MockCallback, InterceptedCall};

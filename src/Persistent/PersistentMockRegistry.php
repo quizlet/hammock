@@ -2,7 +2,7 @@
 
 namespace Hammock\Persistent;
 
-use Hammock\Interfaces\IDeactivatable;
+use type Hammock\Interfaces\IDeactivatable;
 
 class PersistentMockRegistry {
 	protected static vec<IDeactivatable> $registry = vec[];

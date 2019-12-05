@@ -2,8 +2,8 @@
 
 namespace Hammock\Persistent\Mocks;
 
-use Hammock\Exceptions\HammockException;
-use Hammock\Interfaces\{IFunctionMock, IMethodMockContainer, IDeactivatable};
+use type Hammock\Exceptions\HammockException;
+use type Hammock\Interfaces\{IFunctionMock, IMethodMockContainer, IDeactivatable};
 use function Hammock\{get_noop_callback, get_spy_callback};
 use namespace HH\Lib\{C, Dict, Str};
 use type Hammock\MockCallback;

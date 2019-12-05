@@ -2,9 +2,9 @@
 
 namespace Hammock\Persistent\Mocks;
 
-use HH\Lib\{C, Str};
-use Hammock\Exceptions\HammockException;
-use Hammock\Interfaces\{IFunctionMock, IDeactivatable};
+use namespace HH\Lib\{C, Str};
+use type Hammock\Exceptions\HammockException;
+use type Hammock\Interfaces\{IFunctionMock, IDeactivatable};
 use type Hammock\InterceptedCall;
 
 abstract class PersistentFunctionMock implements IFunctionMock, IDeactivatable {

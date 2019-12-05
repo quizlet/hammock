@@ -2,9 +2,9 @@
 
 namespace Hammock\Mocks;
 
-use Hammock\InterceptedCall;
-use Hammock\Interfaces\IFunctionMock;
-use Hammock\Persistent\Mocks\PersistentFunctionMock;
+use type Hammock\InterceptedCall;
+use type Hammock\Interfaces\IFunctionMock;
+use type Hammock\Persistent\Mocks\PersistentFunctionMock;
 
 class FunctionMock implements \IDisposable, IFunctionMock {
 	public function __construct(protected PersistentFunctionMock $delegate) {}

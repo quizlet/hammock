@@ -2,7 +2,7 @@
 
 namespace Hammock;
 
-use Hammock\Exceptions\{HammockException, PassThroughException};
+use type Hammock\Exceptions\{HammockException, PassThroughException};
 use type Hammock\MockCallback;
 
 function get_spy_callback(): MockCallback {

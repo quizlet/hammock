@@ -1,5 +1,13 @@
 {
   "roots": [ "src/", "tests/" ],
   "builtinLinters": "all",
-  "disableAllAutoFixes": true
+  "disableAllAutoFixes": true,
+  "overrides": [
+    {
+      "patterns": ["*"],
+      "disabledLinters": [
+        "Facebook\\HHAST\\Linters\\MustUseOverrideAttributeLinter"
+      ]
+    }
+  ]
 }

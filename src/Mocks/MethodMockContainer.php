@@ -2,9 +2,9 @@
 
 namespace Hammock\Mocks;
 
-use Hammock\Interfaces\{IFunctionMock, IMethodMockContainer};
-use Hammock\MockCallback;
-use Hammock\Persistent\Mocks\PersistentMethodMockContainer;
+use type Hammock\Interfaces\{IFunctionMock, IMethodMockContainer};
+use type Hammock\MockCallback;
+use type Hammock\Persistent\Mocks\PersistentMethodMockContainer;
 
 class MethodMockContainer implements \IDisposable, IMethodMockContainer {
 	public function __construct(
