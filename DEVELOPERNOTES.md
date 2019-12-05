@@ -12,7 +12,7 @@ Fatal error: Uncaught Error: Class undefined: Facebook\AutoloadMap\IncludedRoots
 ### Typechecker
 
 Composer requires two versions of the hsl and hsl-experimental that both define SecureRandom.
-Delete the file in /vendor/hhvm/hsl-experimetal/src/random/*.php
+Delete the file in /vendor/hhvm/hsl-experimetal/src/random/\*.php
 
 In vendor/hhvm/hhast/src/__Private/LintRun.php
 HHAST checks the truthyness of a traversable, vec($errors) first on line 105, like so.
