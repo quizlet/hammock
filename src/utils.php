@@ -2,6 +2,7 @@
 
 namespace Hammock;
 
+use namespace HH\Lib\Str;
 use type Hammock\Exceptions\{HammockException, PassThroughException};
 use type Hammock\MockCallback;
 
@@ -21,7 +22,7 @@ function get_declaring_class_name<Td, T as Td>(
 ): classname<Td> {
 	if (!\method_exists($className, $methodName)) {
 		throw new HammockException(
-			"The method `{$className}::{$methodName}` does not exist.",
+			Str\format("The method `%s::%s` does not exist.", $className, $methodName),
 		);
 	}
 
