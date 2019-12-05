@@ -7,6 +7,7 @@ use type Hammock\MockCallback;
 class ObjectMock<T> extends PersistentMethodMockContainer {
 	public function __construct(protected T $object) {}
 
+  <<__Override>>
 	protected function createMethodMock(
 		string $methodName,
 		MockCallback $callback,
