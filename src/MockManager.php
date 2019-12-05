@@ -10,7 +10,7 @@ namespace Hammock;
 
 use Hammock\Exceptions\{HammockException, PassThroughException};
 use function Hammock\get_declaring_class_name;
-use namespace HH\Lib\{C, Dict, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 use type Hammock\{MockCallback, InterceptedCall};
 
 class MockManager {
@@ -48,7 +48,7 @@ class MockManager {
 			C\contains_key(self::$objectMethodMocks, $mockKey)
 		) {
 			throw new HammockException(
-				"The method `{$mockKey}` has already been mocked.",
+				Str\format("The method `%s` has already been mocked.", $mockKey),
 			);
 		}
 
@@ -74,13 +74,13 @@ class MockManager {
 	): void {
 		if (!\function_exists($globalFunctionName)) {
 			throw new HammockException(
-				"The function `{$globalFunctionName}` does not exist.",
+				Str\format("The function `%s` does not exist.", $globalFunctionName),
 			);
 		}
 
 		if (C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				"The function `{$globalFunctionName}` has already been mocked.",
+				Str\format("The function `%s` has already been mocked.", $globalFunctionName),
 			);
 		}
 
@@ -108,7 +108,7 @@ class MockManager {
 
 		if (C\contains_key(self::$classMethodMocks, $mockKey)) {
 			throw new HammockException(
-				"The method `{$mockKey}` already has a class-level mock.",
+				Str\format("The method `%s` already has a class-level mock.", $mockKey),
 			);
 		}
 
@@ -120,7 +120,7 @@ class MockManager {
 
 		if (C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				"The method `{$mockKey}` has already been mocked for this object.",
+				Str\format("The method `%s` has already been mocked for this object.", $mockKey),
 			);
 		}
 
@@ -144,7 +144,7 @@ class MockManager {
 	): vec<InterceptedCall> {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				"The function `{$globalFunctionName}` has not been mocked.",
+				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
 			);
 		}
 
@@ -178,7 +178,7 @@ class MockManager {
 	): void {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				"The function `{$globalFunctionName}` has not been mocked.",
+				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
 			);
 		}
 
@@ -242,7 +242,7 @@ class MockManager {
 			(mixed $object, vec<mixed> $args): mixed ==> {
 				if ($object === null) {
 					throw new HammockException(
-						"The static method `{$mockKey}` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
+						Str\format("The static method `%s` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.", $mockKey)
 					);
 				}
 
@@ -271,7 +271,7 @@ class MockManager {
 
 		if (!C\contains_key(self::$classMethodMocks, $mockKey)) {
 			throw new HammockException(
-				"The method `{$mockKey}` does not have a class-level mock.",
+				Str\format("The method `%s` does not have a class-level mock.", $mockKey),
 			);
 		}
 
@@ -286,7 +286,7 @@ class MockManager {
 
 		if (!C\contains_key(self::$objectMethodMocks, $mockKey)) {
 			throw new HammockException(
-				"The method `{$mockKey}` does not have an object-level mock.",
+				Str\format("The method `%s` does not have an object-level mock.", $mockKey),
 			);
 		}
 
@@ -294,7 +294,7 @@ class MockManager {
 
 		if (!C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				"The method `{$mockKey}` has not been mocked for this object.",
+				Str\format("The method `%s` has not been mocked for this object.", $mockKey),
 			);
 		}
 
@@ -364,7 +364,7 @@ class MockManager {
 
 		if ($shouldMatchDeclaringClassName && $declaringClassName !== $className) {
 			throw new HammockException(
-				"The method `{$className}::{$methodName}` is declared in `{$declaringClassName}`. Please use `{$declaringClassName}::{$methodName}` instead.",
+				Str\format("The method `%s::%s` is declared in `%s`. Please use `%s::%s` instead.", $className, $methodName, $declaringClassName, $declaringClassName, $methodName),
 			);
 		}
 
@@ -380,7 +380,7 @@ class MockManager {
 		// We can enforce static constraints by using `T as nonnull`.
 		if ($object === null) {
 			throw new HammockException(
-				"The method `{$methodName}` cannot be resolved for `null`.",
+				Str\format("The method `%s` cannot be resolved for `null`.", $methodName),
 			);
 		}
 
@@ -388,7 +388,7 @@ class MockManager {
 
 		if ($className === false) {
 			throw new HammockException(
-				"The method `{$methodName}` cannot be resolved for a non-object.",
+				Str\format("The method `%s` cannot be resolved for a non-object.", $methodName),
 			);
 		}
 

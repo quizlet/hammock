@@ -2,7 +2,7 @@
 
 namespace Hammock\Persistent\Mocks;
 
-use HH\Lib\C;
+use HH\Lib\{C, Str};
 use Hammock\Exceptions\HammockException;
 use Hammock\Interfaces\{IFunctionMock, IDeactivatable};
 use type Hammock\InterceptedCall;
@@ -32,7 +32,7 @@ abstract class PersistentFunctionMock implements IFunctionMock, IDeactivatable {
 
 		if ($i < 0 || $i >= $numCalls) {
 			throw new HammockException(
-				"Cannot access index {$i} of calls (total number of calls: {$numCalls}).",
+				Str\format("Cannot access index %d of calls (total number of calls: %d).", $i, $numCalls),
 			);
 		}
 
