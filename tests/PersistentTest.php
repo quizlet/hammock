@@ -4,11 +4,10 @@ namespace Hammock;
 
 use type Facebook\HackTest\HackTest;
 use type Hammock\Exceptions\HammockException;
-use type Hammock\Fixtures\{AnotherClass, ChildClass, TestClass};
-use type Hammock\Interfaces\IFunctionMock;
+use type Hammock\Fixtures\{ChildClass, TestClass};
 use type Hammock\Persistent\Mocks\{PersistentFunctionMock};
 use function Facebook\FBExpect\expect;
-use function Hammock\Fixtures\{return_input, return_inputs};
+use function Hammock\Fixtures\return_input;
 use namespace Hammock\Persistent;
 
 class PersistentTest extends HackTest {
