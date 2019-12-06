@@ -1,2 +1,2 @@
-test/ export-ignore
+tests/ export-ignore
 .hhconfig export-ignore
