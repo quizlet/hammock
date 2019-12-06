@@ -59,8 +59,7 @@ function mock_global_function(
 	string $globalFunctionName,
 	MockCallback $callback,
 ): PersistentFunctionMock {
-	$globalFunctionMock =
-		new GlobalFunctionMock($globalFunctionName, $callback);
+	$globalFunctionMock = new GlobalFunctionMock($globalFunctionName, $callback);
 
 	PersistentMockRegistry::register($globalFunctionMock);
 

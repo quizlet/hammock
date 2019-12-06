@@ -33,8 +33,7 @@ function get_declaring_class_name<Td, T as Td>(
 	$parentClassName = \get_parent_class($className);
 
 	if (
-		$parentClassName === false ||
-		!\method_exists($parentClassName, $methodName)
+		$parentClassName === false || !\method_exists($parentClassName, $methodName)
 	) {
 		return $className;
 	}

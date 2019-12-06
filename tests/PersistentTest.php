@@ -275,8 +275,7 @@ class PersistentTest extends HackTest {
 	}
 
 	public function testDeactivatingClassMethodMock(): void {
-		$methodMock =
-			$this->mockClassMethod(TestClass::class, 'staticReturnInput');
+		$methodMock = $this->mockClassMethod(TestClass::class, 'staticReturnInput');
 
 		expect(TestClass::staticReturnInput(0))->toBeSame(1);
 
@@ -308,8 +307,7 @@ class PersistentTest extends HackTest {
 	}
 
 	public function testDeactivatingMultipleTimes(): void {
-		$methodMock =
-			$this->mockClassMethod(TestClass::class, 'staticReturnInput');
+		$methodMock = $this->mockClassMethod(TestClass::class, 'staticReturnInput');
 
 		expect(TestClass::staticReturnInput(0))->toBeSame(1);
 
@@ -335,8 +333,7 @@ class PersistentTest extends HackTest {
 		classname<T> $className,
 		string $methodName,
 	): PersistentFunctionMock {
-		return
-			Persistent\mock_class_method($className, $methodName, $args ==> 1);
+		return Persistent\mock_class_method($className, $methodName, $args ==> 1);
 	}
 
 	private function mockObjectMethod<T>(
@@ -361,9 +358,7 @@ class PersistentTest extends HackTest {
 		return Persistent\spy_class_method(TestClass::class, 'returnInput');
 	}
 
-	private function spyObjectMethod(
-		TestClass $object,
-	): PersistentFunctionMock {
+	private function spyObjectMethod(TestClass $object): PersistentFunctionMock {
 		return Persistent\spy_object_method($object, 'returnInput');
 	}
 
@@ -372,13 +367,10 @@ class PersistentTest extends HackTest {
 	}
 
 	private function noopClassMethod(): PersistentFunctionMock {
-		return
-			Persistent\noop_class_method(TestClass::class, 'staticReturnInput');
+		return Persistent\noop_class_method(TestClass::class, 'staticReturnInput');
 	}
 
-	private function noopObjectMethod(
-		TestClass $object,
-	): PersistentFunctionMock {
+	private function noopObjectMethod(TestClass $object): PersistentFunctionMock {
 		return Persistent\noop_object_method($object, 'returnInput');
 	}
 

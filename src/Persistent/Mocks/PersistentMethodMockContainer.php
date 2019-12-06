@@ -44,10 +44,7 @@ abstract class PersistentMethodMockContainer
 	public function getMethodMock(string $methodName): IFunctionMock {
 		if (!C\contains_key($this->methodMocks, $methodName)) {
 			throw new HammockException(
-				Str\format(
-					"There is no mock for the method `%s`.",
-					$methodName,
-				),
+				Str\format("There is no mock for the method `%s`.", $methodName),
 			);
 		}
 

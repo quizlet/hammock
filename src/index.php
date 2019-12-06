@@ -55,8 +55,7 @@ function mock_global_function(
 	string $globalFunctionName,
 	MockCallback $callback,
 ): FunctionMock {
-	$globalFunctionMock =
-		new GlobalFunctionMock($globalFunctionName, $callback);
+	$globalFunctionMock = new GlobalFunctionMock($globalFunctionName, $callback);
 
 	return new FunctionMock($globalFunctionMock);
 }
