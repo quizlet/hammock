@@ -305,6 +305,8 @@ class MockManager {
 		string $mockKey,
 		self::InternalMockCallback $callback,
 	): void {
+    /* HH_FIXME[2049] This function is not in any hhi */
+    /* HH_FIXME[4107] This function is not in any hhi */
 		\fb_intercept(
 			$mockKey,
 			function(
@@ -313,6 +315,7 @@ class MockManager {
 				array<mixed> $args,
 				self::InternalMockCallback $cb,
 				/* HH_IGNORE_ERROR[1002] */
+        /* HH_FIXME[2087] Don't use references!*/
 				bool &$done,
 			): mixed {
 				// NOTE: The following 3 ignores should be unnecessary, but the
@@ -343,6 +346,8 @@ class MockManager {
 	}
 
 	protected static function unmock(string $mockKey): void {
+    /* HH_FIXME[2049] This function is not in any hhi. */
+    /* HH_FIXME[4107] This function is not in any hhi. */
 		\fb_intercept($mockKey, null);
 	}
 
