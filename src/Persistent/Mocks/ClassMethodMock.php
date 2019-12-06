@@ -2,7 +2,7 @@
 
 namespace Hammock\Persistent\Mocks;
 
-use Hammock\MockManager;
+use type Hammock\MockManager;
 use type Hammock\{InterceptedCall, MockCallback};
 
 class ClassMethodMock<T> extends PersistentFunctionMock {
@@ -14,11 +14,13 @@ class ClassMethodMock<T> extends PersistentFunctionMock {
 		MockManager::mockClassMethod($className, $methodName, $callback);
 	}
 
+  <<__Override>>
 	protected function actuallyGetCalls(): vec<InterceptedCall> {
 		return
 			MockManager::getClassMethodCalls($this->className, $this->methodName);
 	}
 
+  <<__Override>>
 	protected function actuallyDeactivate(): void {
 		MockManager::unmockClassMethod($this->className, $this->methodName);
 	}

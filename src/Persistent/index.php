@@ -2,7 +2,7 @@
 
 namespace Hammock\Persistent;
 
-use Hammock\Persistent\Mocks\{
+use type Hammock\Persistent\Mocks\{
 	ClassMethodMock,
 	ClassMock,
 	GlobalFunctionMock,

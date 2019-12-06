@@ -2,7 +2,7 @@
 
 namespace Hammock;
 
-use Hammock\Persistent\Mocks\{
+use type Hammock\Persistent\Mocks\{
 	ClassMethodMock,
 	ClassMock,
 	GlobalFunctionMock,
@@ -10,7 +10,7 @@ use Hammock\Persistent\Mocks\{
 	ObjectMock,
 };
 
-use Hammock\Mocks\{MethodMockContainer, FunctionMock};
+use type Hammock\Mocks\{MethodMockContainer, FunctionMock};
 use function Hammock\{get_noop_callback, get_spy_callback};
 use type Hammock\MockCallback;
 
