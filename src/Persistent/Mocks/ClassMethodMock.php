@@ -14,13 +14,15 @@ class ClassMethodMock<T> extends PersistentFunctionMock {
 		MockManager::mockClassMethod($className, $methodName, $callback);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyGetCalls(): vec<InterceptedCall> {
-		return
-			MockManager::getClassMethodCalls($this->className, $this->methodName);
+		return MockManager::getClassMethodCalls(
+			$this->className,
+			$this->methodName,
+		);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyDeactivate(): void {
 		MockManager::unmockClassMethod($this->className, $this->methodName);
 	}

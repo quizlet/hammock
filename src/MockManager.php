@@ -41,14 +41,18 @@ class MockManager {
 		string $methodName,
 		MockCallback $callback,
 	): void {
-		$mockKey = self::getFullyQualifiedClassMethodName($className, $methodName);
+		$mockKey =
+			self::getFullyQualifiedClassMethodName($className, $methodName);
 
 		if (
 			C\contains_key(self::$classMethodMocks, $mockKey) ||
 			C\contains_key(self::$objectMethodMocks, $mockKey)
 		) {
 			throw new HammockException(
-				Str\format("The method `%s` has already been mocked.", $mockKey),
+				Str\format(
+					"The method `%s` has already been mocked.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -74,13 +78,19 @@ class MockManager {
 	): void {
 		if (!\function_exists($globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` does not exist.", $globalFunctionName),
+				Str\format(
+					"The function `%s` does not exist.",
+					$globalFunctionName,
+				),
 			);
 		}
 
 		if (C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has already been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has already been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -104,11 +114,15 @@ class MockManager {
 		string $methodName,
 		MockCallback $callback,
 	): void {
-		$mockKey = self::getFullyQualifiedObjectMethodName($object, $methodName);
+		$mockKey =
+			self::getFullyQualifiedObjectMethodName($object, $methodName);
 
 		if (C\contains_key(self::$classMethodMocks, $mockKey)) {
 			throw new HammockException(
-				Str\format("The method `%s` already has a class-level mock.", $mockKey),
+				Str\format(
+					"The method `%s` already has a class-level mock.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -120,7 +134,10 @@ class MockManager {
 
 		if (C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				Str\format("The method `%s` has already been mocked for this object.", $mockKey),
+				Str\format(
+					"The method `%s` has already been mocked for this object.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -134,7 +151,8 @@ class MockManager {
 		classname<T> $className,
 		string $methodName,
 	): vec<InterceptedCall> {
-		$mockKey = self::getValidatedClassMethodMockKey($className, $methodName);
+		$mockKey =
+			self::getValidatedClassMethodMockKey($className, $methodName);
 
 		return self::$classMethodMocks[$mockKey];
 	}
@@ -144,7 +162,10 @@ class MockManager {
 	): vec<InterceptedCall> {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has not been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -156,7 +177,10 @@ class MockManager {
 		string $methodName,
 	): vec<InterceptedCall> {
 		list($mockKey, $objectHash) =
-			self::getValidatedObjectMethodMockKeyAndObjectHash($object, $methodName);
+			self::getValidatedObjectMethodMockKeyAndObjectHash(
+				$object,
+				$methodName,
+			);
 
 		return self::$objectMethodMocks[$mockKey][$objectHash]['calls'];
 	}
@@ -165,12 +189,15 @@ class MockManager {
 		classname<T> $className,
 		string $methodName,
 	): void {
-		$mockKey = self::getValidatedClassMethodMockKey($className, $methodName);
+		$mockKey =
+			self::getValidatedClassMethodMockKey($className, $methodName);
 
 		self::unmock($mockKey);
 
-		self::$classMethodMocks =
-			Dict\filter_keys(self::$classMethodMocks, ($key) ==> $key !== $mockKey);
+		self::$classMethodMocks = Dict\filter_keys(
+			self::$classMethodMocks,
+			($key) ==> $key !== $mockKey,
+		);
 	}
 
 	public static function unmockGlobalFunction(
@@ -178,7 +205,10 @@ class MockManager {
 	): void {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has not been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -195,7 +225,10 @@ class MockManager {
 		string $methodName,
 	): void {
 		list($mockKey, $objectHash) =
-			self::getValidatedObjectMethodMockKeyAndObjectHash($object, $methodName);
+			self::getValidatedObjectMethodMockKeyAndObjectHash(
+				$object,
+				$methodName,
+			);
 
 		self::$objectMethodMocks[$mockKey] = Dict\filter_keys(
 			self::$objectMethodMocks[$mockKey],
@@ -242,22 +275,32 @@ class MockManager {
 			(mixed $object, vec<mixed> $args): mixed ==> {
 				if ($object === null) {
 					throw new HammockException(
-						Str\format("The static method `%s` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.", $mockKey)
+						Str\format(
+							"The static method `%s` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
+							$mockKey,
+						),
 					);
 				}
 
 				$objectHash = self::hashObject($object);
 
-				if (!C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
+				if (
+					!C\contains_key(
+						self::$objectMethodMocks[$mockKey],
+						$objectHash,
+					)
+				) {
 					throw new PassThroughException();
 				}
 
-				self::$objectMethodMocks[$mockKey][$objectHash]['calls'][] = shape(
-					'args' => $args,
-					'object' => $object,
-				);
+				self::$objectMethodMocks[$mockKey][$objectHash]['calls'][] =
+					shape(
+						'args' => $args,
+						'object' => $object,
+					);
 
-				return self::$objectMethodMocks[$mockKey][$objectHash]['callback']
+				return
+					self::$objectMethodMocks[$mockKey][$objectHash]['callback']
 					|> $$($args);
 			},
 		);
@@ -267,11 +310,15 @@ class MockManager {
 		classname<T> $className,
 		string $methodName,
 	): string {
-		$mockKey = self::getFullyQualifiedClassMethodName($className, $methodName);
+		$mockKey =
+			self::getFullyQualifiedClassMethodName($className, $methodName);
 
 		if (!C\contains_key(self::$classMethodMocks, $mockKey)) {
 			throw new HammockException(
-				Str\format("The method `%s` does not have a class-level mock.", $mockKey),
+				Str\format(
+					"The method `%s` does not have a class-level mock.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -282,11 +329,15 @@ class MockManager {
 		T $object,
 		string $methodName,
 	): (string, string) {
-		$mockKey = self::getFullyQualifiedObjectMethodName($object, $methodName);
+		$mockKey =
+			self::getFullyQualifiedObjectMethodName($object, $methodName);
 
 		if (!C\contains_key(self::$objectMethodMocks, $mockKey)) {
 			throw new HammockException(
-				Str\format("The method `%s` does not have an object-level mock.", $mockKey),
+				Str\format(
+					"The method `%s` does not have an object-level mock.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -294,7 +345,10 @@ class MockManager {
 
 		if (!C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				Str\format("The method `%s` has not been mocked for this object.", $mockKey),
+				Str\format(
+					"The method `%s` has not been mocked for this object.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -305,8 +359,8 @@ class MockManager {
 		string $mockKey,
 		self::InternalMockCallback $callback,
 	): void {
-    /* HH_FIXME[2049] This function is not in any hhi */
-    /* HH_FIXME[4107] This function is not in any hhi */
+		/* HH_FIXME[2049] This function is not in any hhi */
+		/* HH_FIXME[4107] This function is not in any hhi */
 		\fb_intercept(
 			$mockKey,
 			function(
@@ -315,7 +369,7 @@ class MockManager {
 				array<mixed> $args,
 				self::InternalMockCallback $cb,
 				/* HH_IGNORE_ERROR[1002] */
-        /* HH_FIXME[2087] Don't use references!*/
+				/* HH_FIXME[2087] Don't use references!*/
 				bool &$done,
 			): mixed {
 				// NOTE: The following 3 ignores should be unnecessary, but the
@@ -346,8 +400,8 @@ class MockManager {
 	}
 
 	protected static function unmock(string $mockKey): void {
-    /* HH_FIXME[2049] This function is not in any hhi. */
-    /* HH_FIXME[4107] This function is not in any hhi. */
+		/* HH_FIXME[2049] This function is not in any hhi. */
+		/* HH_FIXME[4107] This function is not in any hhi. */
 		\fb_intercept($mockKey, null);
 	}
 
@@ -362,9 +416,18 @@ class MockManager {
 	): string {
 		$declaringClassName = get_declaring_class_name($className, $methodName);
 
-		if ($shouldMatchDeclaringClassName && $declaringClassName !== $className) {
+		if (
+			$shouldMatchDeclaringClassName && $declaringClassName !== $className
+		) {
 			throw new HammockException(
-				Str\format("The method `%s::%s` is declared in `%s`. Please use `%s::%s` instead.", $className, $methodName, $declaringClassName, $declaringClassName, $methodName),
+				Str\format(
+					"The method `%s::%s` is declared in `%s`. Please use `%s::%s` instead.",
+					$className,
+					$methodName,
+					$declaringClassName,
+					$declaringClassName,
+					$methodName,
+				),
 			);
 		}
 
@@ -380,7 +443,10 @@ class MockManager {
 		// We can enforce static constraints by using `T as nonnull`.
 		if ($object === null) {
 			throw new HammockException(
-				Str\format("The method `%s` cannot be resolved for `null`.", $methodName),
+				Str\format(
+					"The method `%s` cannot be resolved for `null`.",
+					$methodName,
+				),
 			);
 		}
 
@@ -388,13 +454,19 @@ class MockManager {
 
 		if ($className === false) {
 			throw new HammockException(
-				Str\format("The method `%s` cannot be resolved for a non-object.", $methodName),
+				Str\format(
+					"The method `%s` cannot be resolved for a non-object.",
+					$methodName,
+				),
 			);
 		}
 
 		// NOTE: When mocking/unmocking object methods, we don't care that
 		// the object's class is the declaring class for the input method.
-		return
-			self::getFullyQualifiedClassMethodName($className, $methodName, false);
+		return self::getFullyQualifiedClassMethodName(
+			$className,
+			$methodName,
+			false,
+		);
 	}
 }

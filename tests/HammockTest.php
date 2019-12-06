@@ -125,8 +125,7 @@ class HammockTest extends HackTest {
 		}
 
 		// Shortcut.
-		using $methodSpy =
-			spy_class_method(TestClass::class, 'returnInput');
+		using $methodSpy = spy_class_method(TestClass::class, 'returnInput');
 
 		$firstObject = new TestClass();
 		$secondObject = new TestClass();
@@ -244,11 +243,7 @@ class HammockTest extends HackTest {
 		$object = new TestClass();
 		$childObject = new ChildClass();
 
-		using mock_class_method(
-			TestClass::class,
-			'returnInput',
-			$args ==> 1,
-		);
+		using mock_class_method(TestClass::class, 'returnInput', $args ==> 1);
 
 		expect($object->returnInput(0))->toBeSame(1);
 		expect($childObject->returnInput(0))->toBeSame(1);
@@ -534,11 +529,7 @@ class HammockTest extends HackTest {
 		expect(() ==> {
 			$object = new TestClass();
 
-			using mock_object_method(
-				$object,
-				'staticReturnInput',
-				$args ==> 1,
-			);
+			using mock_object_method($object, 'staticReturnInput', $args ==> 1);
 
 			TestClass::staticReturnInput(0);
 		})->toThrow(

@@ -13,12 +13,12 @@ class GlobalFunctionMock extends PersistentFunctionMock {
 		MockManager::mockGlobalFunction($globalFunctionName, $callback);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyGetCalls(): vec<InterceptedCall> {
 		return MockManager::getGlobalFunctionCalls($this->globalFunctionName);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyDeactivate(): void {
 		MockManager::unmockGlobalFunction($this->globalFunctionName);
 	}
