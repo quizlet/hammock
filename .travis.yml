@@ -1,4 +1,3 @@
-sudo: required
 language: shell
 services: docker
 env:
