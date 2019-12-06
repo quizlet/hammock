@@ -1,5 +1,5 @@
 sudo: required
-language: generic
+language: shell
 services: docker
 env:
   - HHVM_VERSION=3.30-latest
