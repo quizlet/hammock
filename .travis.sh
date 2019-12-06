@@ -9,7 +9,7 @@ php --version
   cd $(mktemp -d)
   curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 )
-hhvm composer install
+hhvm /usr/local/bin/composer install
 
 hh_client
 
