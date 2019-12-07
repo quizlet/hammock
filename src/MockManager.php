@@ -11,7 +11,7 @@ namespace Hammock;
 use type Hammock\Exceptions\{HammockException, PassThroughException};
 use function Hammock\get_declaring_class_name;
 use namespace HH\Lib\{C, Dict, Str, Vec};
-use type Hammock\{MockCallback, InterceptedCall};
+use type Hammock\{InterceptedCall, MockCallback};
 
 class MockManager {
 	const type InternalMockCallback = (function(mixed, vec<mixed>): mixed);
