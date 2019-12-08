@@ -4,7 +4,7 @@ namespace Hammock\Persistent\Mocks;
 
 use namespace HH\Lib\{C, Str};
 use type Hammock\Exceptions\HammockException;
-use type Hammock\Interfaces\{IFunctionMock, IDeactivatable};
+use type Hammock\Interfaces\{IDeactivatable, IFunctionMock};
 use type Hammock\InterceptedCall;
 
 abstract class PersistentFunctionMock implements IFunctionMock, IDeactivatable {

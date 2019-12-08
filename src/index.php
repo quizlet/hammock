@@ -10,7 +10,7 @@ use type Hammock\Persistent\Mocks\{
 	ObjectMock,
 };
 
-use type Hammock\Mocks\{MethodMockContainer, FunctionMock};
+use type Hammock\Mocks\{FunctionMock, MethodMockContainer};
 use function Hammock\{get_noop_callback, get_spy_callback};
 use type Hammock\MockCallback;
 
