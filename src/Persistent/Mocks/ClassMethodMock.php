@@ -2,8 +2,7 @@
 
 namespace Hammock\Persistent\Mocks;
 
-use type Hammock\MockManager;
-use type Hammock\{InterceptedCall, MockCallback};
+use type Hammock\{InterceptedCall, MockCallback, MockManager};
 
 class ClassMethodMock<T> extends PersistentFunctionMock {
 	public function __construct(
