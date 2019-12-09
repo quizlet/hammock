@@ -80,7 +80,10 @@ class MockManager {
 
 		if (C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has already been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has already been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -120,7 +123,10 @@ class MockManager {
 
 		if (C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				Str\format("The method `%s` has already been mocked for this object.", $mockKey),
+				Str\format(
+					"The method `%s` has already been mocked for this object.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -144,7 +150,10 @@ class MockManager {
 	): vec<InterceptedCall> {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has not been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -178,7 +187,10 @@ class MockManager {
 	): void {
 		if (!C\contains_key(self::$globalFunctionMocks, $globalFunctionName)) {
 			throw new HammockException(
-				Str\format("The function `%s` has not been mocked.", $globalFunctionName),
+				Str\format(
+					"The function `%s` has not been mocked.",
+					$globalFunctionName,
+				),
 			);
 		}
 
@@ -242,7 +254,10 @@ class MockManager {
 			(mixed $object, vec<mixed> $args): mixed ==> {
 				if ($object === null) {
 					throw new HammockException(
-						Str\format("The static method `%s` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.", $mockKey)
+						Str\format(
+							"The static method `%s` was mocked through an object-level mock. Static methods may only be mocked by class-level mocks.",
+							$mockKey,
+						),
 					);
 				}
 
@@ -271,7 +286,10 @@ class MockManager {
 
 		if (!C\contains_key(self::$classMethodMocks, $mockKey)) {
 			throw new HammockException(
-				Str\format("The method `%s` does not have a class-level mock.", $mockKey),
+				Str\format(
+					"The method `%s` does not have a class-level mock.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -286,7 +304,10 @@ class MockManager {
 
 		if (!C\contains_key(self::$objectMethodMocks, $mockKey)) {
 			throw new HammockException(
-				Str\format("The method `%s` does not have an object-level mock.", $mockKey),
+				Str\format(
+					"The method `%s` does not have an object-level mock.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -294,7 +315,10 @@ class MockManager {
 
 		if (!C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
 			throw new HammockException(
-				Str\format("The method `%s` has not been mocked for this object.", $mockKey),
+				Str\format(
+					"The method `%s` has not been mocked for this object.",
+					$mockKey,
+				),
 			);
 		}
 
@@ -305,8 +329,8 @@ class MockManager {
 		string $mockKey,
 		self::InternalMockCallback $callback,
 	): void {
-    /* HH_FIXME[2049] This function is not in any hhi */
-    /* HH_FIXME[4107] This function is not in any hhi */
+		/* HH_FIXME[2049] This function is not in any hhi */
+		/* HH_FIXME[4107] This function is not in any hhi */
 		\fb_intercept(
 			$mockKey,
 			function(
@@ -315,7 +339,7 @@ class MockManager {
 				array<mixed> $args,
 				self::InternalMockCallback $cb,
 				/* HH_IGNORE_ERROR[1002] */
-        /* HH_FIXME[2087] Don't use references!*/
+				/* HH_FIXME[2087] Don't use references!*/
 				bool &$done,
 			): mixed {
 				// NOTE: The following 3 ignores should be unnecessary, but the
@@ -346,8 +370,8 @@ class MockManager {
 	}
 
 	protected static function unmock(string $mockKey): void {
-    /* HH_FIXME[2049] This function is not in any hhi. */
-    /* HH_FIXME[4107] This function is not in any hhi. */
+		/* HH_FIXME[2049] This function is not in any hhi. */
+		/* HH_FIXME[4107] This function is not in any hhi. */
 		\fb_intercept($mockKey, null);
 	}
 
@@ -364,7 +388,14 @@ class MockManager {
 
 		if ($shouldMatchDeclaringClassName && $declaringClassName !== $className) {
 			throw new HammockException(
-				Str\format("The method `%s::%s` is declared in `%s`. Please use `%s::%s` instead.", $className, $methodName, $declaringClassName, $declaringClassName, $methodName),
+				Str\format(
+					"The method `%s::%s` is declared in `%s`. Please use `%s::%s` instead.",
+					$className,
+					$methodName,
+					$declaringClassName,
+					$declaringClassName,
+					$methodName,
+				),
 			);
 		}
 
@@ -380,7 +411,10 @@ class MockManager {
 		// We can enforce static constraints by using `T as nonnull`.
 		if ($object === null) {
 			throw new HammockException(
-				Str\format("The method `%s` cannot be resolved for `null`.", $methodName),
+				Str\format(
+					"The method `%s` cannot be resolved for `null`.",
+					$methodName,
+				),
 			);
 		}
 
@@ -388,7 +422,10 @@ class MockManager {
 
 		if ($className === false) {
 			throw new HammockException(
-				Str\format("The method `%s` cannot be resolved for a non-object.", $methodName),
+				Str\format(
+					"The method `%s` cannot be resolved for a non-object.",
+					$methodName,
+				),
 			);
 		}
 

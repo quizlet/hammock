@@ -22,7 +22,11 @@ function get_declaring_class_name<Td, T as Td>(
 ): classname<Td> {
 	if (!\method_exists($className, $methodName)) {
 		throw new HammockException(
-			Str\format("The method `%s::%s` does not exist.", $className, $methodName),
+			Str\format(
+				"The method `%s::%s` does not exist.",
+				$className,
+				$methodName,
+			),
 		);
 	}
 

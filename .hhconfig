@@ -1,1 +1,2 @@
 assume_php = true
+hackfmt.tabs = true

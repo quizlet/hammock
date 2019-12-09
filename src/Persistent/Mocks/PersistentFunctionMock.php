@@ -32,7 +32,11 @@ abstract class PersistentFunctionMock implements IFunctionMock, IDeactivatable {
 
 		if ($i < 0 || $i >= $numCalls) {
 			throw new HammockException(
-				Str\format("Cannot access index %d of calls (total number of calls: %d).", $i, $numCalls),
+				Str\format(
+					"Cannot access index %d of calls (total number of calls: %d).",
+					$i,
+					$numCalls,
+				),
 			);
 		}
 

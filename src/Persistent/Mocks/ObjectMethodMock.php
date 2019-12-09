@@ -13,12 +13,12 @@ class ObjectMethodMock<T> extends PersistentFunctionMock {
 		MockManager::mockObjectMethod($object, $methodName, $callback);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyGetCalls(): vec<InterceptedCall> {
 		return MockManager::getObjectMethodCalls($this->object, $this->methodName);
 	}
 
-  <<__Override>>
+	<<__Override>>
 	protected function actuallyDeactivate(): void {
 		MockManager::unmockObjectMethod($this->object, $this->methodName);
 	}

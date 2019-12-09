@@ -375,7 +375,6 @@ class PersistentTest extends HackTest {
 	}
 
 	private function noopGlobalFunction(): PersistentFunctionMock {
-		return
-			Persistent\noop_global_function('Hammock\Fixtures\return_input');
+		return Persistent\noop_global_function('Hammock\Fixtures\return_input');
 	}
 }
