@@ -14,7 +14,7 @@ runtime=$(hhvm --php -r "echo HHVM_VERSION[0] === '3' ? 'hhvm' : 'php';")
 if [ "$runtime" = "hhvm" ]; then
   hhvm /usr/local/bin/composer install
 else
-	php /usr/local/bin/composer install
+  php /usr/local/bin/composer install
 fi
 
 hh_client
