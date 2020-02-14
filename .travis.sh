@@ -9,7 +9,13 @@ php --version
   cd $(mktemp -d)
   curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 )
-hhvm /usr/local/bin/composer install
+
+runtime=$(hhvm --php -r "echo HHVM_VERSION[0] === '4' ? 'hhvm' : 'php';")
+if [ "$runtime" = "hhvm" ]; then
+  hhvm /usr/local/bin/composer install
+else
+	php /usr/local/bin/composer install
+fi
 
 hh_client
 
