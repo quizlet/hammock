@@ -13,7 +13,7 @@ function get_spy_callback(): MockCallback {
 }
 
 function get_noop_callback(): MockCallback {
-	return $args ==> {};
+	return $args ==> null;
 }
 
 function get_declaring_class_name<Td, T as Td>(
