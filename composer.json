@@ -13,14 +13,14 @@
     "keywords": ["hammock", "hack", "hacklang", "library", "mock", "mocking", "test", "testing", "php"],
     "type": "library",
     "require": {
-        "hhvm/hsl": "^3.30",
-        "hhvm/hsl-experimental": "^3.29",
-        "hhvm/hhvm-autoload": "^1.8",
-        "facebook/hh-clilib": "^1.2.1|^2"
+        "hhvm/hsl": ">=3.30",
+        "hhvm/hsl-experimental": ">=3.29",
+        "hhvm/hhvm-autoload": ">=1.8",
+        "facebook/hh-clilib": ">=1.2.1"
     },
     "require-dev": {
-        "facebook/fbexpect": "^2",
-        "hhvm/hacktest": "^1.2",
-        "hhvm/hhast": "^3.27"
+        "facebook/fbexpect": ">=2",
+        "hhvm/hacktest": ">=1.2",
+        "hhvm/hhast": ">=3.27"
     }
 }
