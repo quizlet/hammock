@@ -14,7 +14,6 @@
     "type": "library",
     "require": {
         "hhvm/hsl": ">=3.28",
-        "hhvm/hsl-experimental": ">=3.28",
         "hhvm/hhvm-autoload": ">=1.7",
         "facebook/hh-clilib": ">=1.2.1"
     },
