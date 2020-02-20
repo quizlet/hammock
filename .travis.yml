@@ -4,7 +4,10 @@ os:
 language: shell
 services: docker
 env:
+- HHVM_VERSION=3.28-latest
+- HHVM_VERSION=3.29-latest
 - HHVM_VERSION=3.30-latest
+- HHVM_VERSION=4.0-latest
 - HHVM_VERSION=4.1-latest
 - HHVM_VERSION=4.2-latest
 - HHVM_VERSION=4.6-latest
