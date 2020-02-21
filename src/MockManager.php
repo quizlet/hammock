@@ -349,7 +349,7 @@ class MockManager {
 				/* HH_FIXME[2087] Don't use references!*/
 				bool &$done,
 			): mixed {
-				// NOTE: The following 3 ignores should be unnecessary, but the
+				// NOTE: The following 2 ignores should be unnecessary, but the
 				// type-checker trips out because of the last `&$done` parameter.
 				// Removing the comma after `&$done` fixes the issue, but then
 				// `hackfmt` automatically re-adds the comma and breaks it again.
