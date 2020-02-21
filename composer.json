@@ -13,8 +13,9 @@
     "keywords": ["hammock", "hack", "hacklang", "library", "mock", "mocking", "test", "testing", "php"],
     "type": "library",
     "require": {
-        "hhvm/hsl": ">=3.28",
-        "hhvm/hhvm-autoload": ">=1.7",
+		  	"hhvm": ">=3.24",
+		  	"hhvm/hhvm-autoload": "^1|^2|^3",
+		  	"hhvm/hsl": ">1.4 <5",
         "facebook/hh-clilib": ">=1.2.1"
     },
     "require-dev": {

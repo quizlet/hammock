@@ -4,18 +4,21 @@ os:
 language: shell
 services: docker
 env:
+- HHVM_VERSION=3.25.3
+- HHVM_VERSION=3.26.3
+- HHVM_VERSION=3.27-lts-latest
 - HHVM_VERSION=3.28.3
 - HHVM_VERSION=3.29-latest
 - HHVM_VERSION=3.30-latest
 - HHVM_VERSION=4.0-latest
-- HHVM_VERSION=4.1-latest
-- HHVM_VERSION=4.2-latest
-- HHVM_VERSION=4.6-latest
-- HHVM_VERSION=4.10-latest
-- HHVM_VERSION=4.14-latest
-- HHVM_VERSION=4.18-latest
-- HHVM_VERSION=4.22-latest
-- HHVM_VERSION=4.25-latest
+# - HHVM_VERSION=4.1-latest
+# - HHVM_VERSION=4.2-latest
+# - HHVM_VERSION=4.6-latest
+# - HHVM_VERSION=4.10-latest
+# - HHVM_VERSION=4.14-latest
+# - HHVM_VERSION=4.18-latest
+# - HHVM_VERSION=4.22-latest
+# - HHVM_VERSION=4.25-latest
 
 install:
 - docker pull hhvm/hhvm:$HHVM_VERSION

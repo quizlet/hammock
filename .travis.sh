@@ -19,8 +19,8 @@ if [ "$runtime" = "hhvm" ]; then
     # hhvm-autoload needs to have a directory here, but it can be empty.
     mkdir tests
     # We can't install hacktest
-    # rm composer.json (next commit)
-    # mv composer.old.json composer.json (next commit)
+    rm composer.json
+    mv composer.old.json composer.json
   fi
   hhvm /usr/local/bin/composer install
 else

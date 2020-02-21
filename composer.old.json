@@ -1,0 +1,21 @@
+{
+	"name": "quizlet/hammock",
+	"description": "Hammock is a stand-alone mocking library for Hacklang.",
+	"homepage": "https://github.com/quizlet/hammock",
+	"license": "MIT",
+	"authors": [{
+			"name": "Riya Dashoriya",
+			"email": "riya.dashoriya@quizlet.com"
+	}, {
+			"name": "Tyron Jung",
+			"email": "tyron.jung@quizlet.com"
+	}],
+	"keywords": ["hammock", "hack", "hacklang", "library", "mock", "mocking", "test", "testing", "php"],
+	"type": "library",
+	"require": {
+			"hhvm": ">=3.24",
+			"hhvm/hhvm-autoload": "^1|^2|^3",
+			"hhvm/hsl": ">1.4 <5",
+			"facebook/hh-clilib": ">=1.2.1"
+	}
+}
