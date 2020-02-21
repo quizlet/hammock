@@ -6,7 +6,8 @@
     {
       "patterns": ["*"],
       "disabledLinters": [
-        "Facebook\\HHAST\\Linters\\MustUseOverrideAttributeLinter"
+        "Facebook\\HHAST\\Linters\\MustUseOverrideAttributeLinter",
+        "Facebook\\HHAST\\Linters\\NoByRefParameterDeclarationsLinter"
       ]
     }
   ]

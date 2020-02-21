@@ -325,10 +325,17 @@ class MockManager {
 		return tuple($mockKey, $objectHash);
 	}
 
+	/**
+	 * @return mixed This function doesn't actually return anything.
+	 * It is just a work around since hh_client can't parse this function
+	 * in older hhvm versions.
+	 * You should ignore its return value.
+	 * It is always null.
+	 */
 	protected static function mock(
 		string $mockKey,
 		self::InternalMockCallback $callback,
-	): void {
+	): mixed {
 		/* HH_FIXME[2049] This function is not in any hhi */
 		/* HH_FIXME[4107] This function is not in any hhi */
 		\fb_intercept(
@@ -342,7 +349,7 @@ class MockManager {
 				/* HH_FIXME[2087] Don't use references!*/
 				bool &$done,
 			): mixed {
-				// NOTE: The following 3 ignores should be unnecessary, but the
+				// NOTE: The following 2 ignores should be unnecessary, but the
 				// type-checker trips out because of the last `&$done` parameter.
 				// Removing the comma after `&$done` fixes the issue, but then
 				// `hackfmt` automatically re-adds the comma and breaks it again.
@@ -356,17 +363,19 @@ class MockManager {
 					self::$currentObject = $object;
 
 					/* HH_IGNORE_ERROR[2050] */
-					/* HH_IGNORE_ERROR[4084] */
 					return vec($args) |> $cb($object, $$);
 				} catch (PassThroughException $e) {
 					// Pass through to the original, unmocked behavior.
 					$done = false;
+					return null;
 				} finally {
 					self::$currentObject = $previousObject;
 				}
 			},
 			$callback,
 		);
+
+		return null; /* void */
 	}
 
 	protected static function unmock(string $mockKey): void {
