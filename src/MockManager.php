@@ -346,6 +346,11 @@ class MockManager {
 				// type-checker trips out because of the last `&$done` parameter.
 				// Removing the comma after `&$done` fixes the issue, but then
 				// `hackfmt` automatically re-adds the comma and breaks it again.
+				// Hack is really confused about this.
+				// Older versions think that this closure doesn't exist,
+				// so it thinks we are returning from a void function.
+				// This is because of references not parsing correctly in the typechecker.\
+				// Ignore the 4084 ignore errors (but remove them once we stop supporting 3.27)
 
 				// TODO: Use `$object is string`.
 				/* HH_IGNORE_ERROR[2050] */
@@ -356,11 +361,12 @@ class MockManager {
 					self::$currentObject = $object;
 
 					/* HH_IGNORE_ERROR[2050] */
-					/* HH_IGNORE_ERROR[4084] */
+					/* HH_IGNORE_ERROR[4084] You cannot return a value, this is a void function. (false positive)*/
 					return vec($args) |> $cb($object, $$);
 				} catch (PassThroughException $e) {
 					// Pass through to the original, unmocked behavior.
 					$done = false;
+					/* HH_IGNORE_ERROR[4084] You cannot return a value, this is a void function. (false positive)*/
 					return null;
 				} finally {
 					self::$currentObject = $previousObject;
