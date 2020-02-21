@@ -10,7 +10,7 @@ php --version
   curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 )
 
-canruntests=$(hhvm --php -r "echo HHVM_VERSION_ID < 32800 ? 'yes' : 'no';")
+canruntests=$(hhvm --php -r "echo HHVM_VERSION_ID >= 32800 ? 'yes' : 'no';")
 if [ "$canruntests" = "yes" ]; then
   rm composer.json
   mv composer.development.json composer.json
