@@ -326,7 +326,7 @@ class MockManager {
 	}
 
 	/**
-	 * @return void This function doesn't return anything.
+	 * @return mixed This function doesn't actually return anything.
 	 * It is just a work around since hh_client can't parse this function
 	 * in older hhvm versions.
 	 * You should ignore its return value.
