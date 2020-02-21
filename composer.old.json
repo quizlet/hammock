@@ -15,7 +15,6 @@
 	"require": {
 			"hhvm": ">=3.24",
 			"hhvm/hhvm-autoload": "^1|^2|^3",
-			"hhvm/hsl": ">1.4 <5",
-			"facebook/hh-clilib": ">=1.2.1"
+			"hhvm/hsl": ">1.4 <5"
 	}
 }
