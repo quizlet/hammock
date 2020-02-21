@@ -24,8 +24,8 @@ if [ "$runtime" = "hhvm" ]; then
   fi
   hhvm /usr/local/bin/composer install
 else
-    # Implicitly uses php
-    composer install
+  # Implicitly uses php
+  composer install
 fi
 
 hh_client
