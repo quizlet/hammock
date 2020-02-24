@@ -10,18 +10,19 @@ php --version
   curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 )
 
+canruntests=$(hhvm --php -r "echo HHVM_VERSION_ID >= 32800 ? 'yes' : 'no';")
+if [ "$canruntests" = "yes" ]; then
+  rm composer.json
+  mv composer.development.json composer.json
+else
+  # The tests won't typecheck and work, so I remove them.
+  rm -r tests
+  # hhvm-autoload needs to have a directory here, but it can be empty.
+  mkdir tests
+fi
+
 runtime=$(hhvm --php -r "echo HHVM_VERSION_ID >= 40000 ? 'php' : 'hhvm';")
 if [ "$runtime" = "hhvm" ]; then
-  removetestfiles=$(hhvm --php -r "echo HHVM_VERSION_ID < 32800 ? 'yes' : 'no';")
-  if [ "$removetestfiles" = "yes" ]; then
-    # The tests won't typecheck and work, so I remove them.
-    rm -r tests
-    # hhvm-autoload needs to have a directory here, but it can be empty.
-    mkdir tests
-    # We can't install hacktest
-    rm composer.json
-    mv composer.old.json composer.json
-  fi
   hhvm /usr/local/bin/composer install
 else
   # Implicitly uses php
@@ -30,7 +31,6 @@ fi
 
 hh_client
 
-runstests=$(hhvm --php -r "echo HHVM_VERSION_ID >= 32800 ? 'canruntests' : 'cannotruntests';")
-if [ "$runstests" = "canruntests" ]; then
+if [ "$canruntests" = "yes" ]; then
   vendor/bin/hacktest tests/
 fi
