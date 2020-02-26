@@ -1,4 +1,4 @@
-# API
+# Top-level functions
 
 Mocks are useful when trying to override a function's behavior with a stub, as well as track the calls into the overridden function. Spies are useful when trying to track the calls into a function without affecting its behavior. No-ops are useful when trying to override a function's behavior with no-op. The public APIs intended for use are as follows:
 
@@ -231,6 +231,8 @@ Mocks are useful when trying to override a function's behavior with a stub, as w
 		```
 
 		</p></details>
+
+# Returned object interfaces
 
 The `MockCallback` type is simply `(function(vec<mixed>): mixed)`. The only parameter to `MockCallback` is a vector of the intercepted arguments that were passed into the mocked function. Since each intercepted argument loses its original type information, it will have to be properly type-casted to be used within the callback.
 
