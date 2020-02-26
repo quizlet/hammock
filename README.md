@@ -64,9 +64,9 @@ The full API documentation can be found in [API.md](https://github.com/quizlet/h
 
 If you ever wanted to contribute to open-source, now is the chance! Please read [CONTRIBUTING.md](https://github.com/quizlet/hammock/blob/master/CONTRIBUTING.md) to understand the process for submitting pull requests.
 
-# Contributors
+# Acknowledgements
 
-Thanks to the following people who have contributed to this project:
+Thanks to the following people who have contributed to Hammock:
 - [Tyron Jung](https://github.com/tyronjung-quizlet)
 - [Riya Dashoriya](https://github.com/riyadashoriya-qz)
 - [Karoun Kasraie](https://github.com/karoun)
