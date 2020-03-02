@@ -355,12 +355,12 @@ A `MethodMockContainer` creates and encapsulates a set of function mocks and dea
 
 ## Passing Through to the Original Behavior
 
-In order to pass through to the original function behavior within the mock callback, throw the `PassThroughException`:
+In order to pass through to the original function behavior within the mock callback, throw the `PassthroughException`:
 
 ```hack
 using $functionMock = Hammock\mock_global_function('return_zero', $args ==> {
 	if (boolval($args[0])) {
-		throw new Hammock\Exceptions\PassThroughException();
+		throw new Hammock\Exceptions\PassthroughException();
 	}
 
 	return 1;

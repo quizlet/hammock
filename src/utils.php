@@ -3,12 +3,12 @@
 namespace Hammock;
 
 use namespace HH\Lib\Str;
-use type Hammock\Exceptions\{HammockException, PassThroughException};
+use type Hammock\Exceptions\{HammockException, PassthroughException};
 use type Hammock\MockCallback;
 
 function get_spy_callback(): MockCallback {
 	return $args ==> {
-		throw new PassThroughException();
+		throw new PassthroughException();
 	};
 }
 

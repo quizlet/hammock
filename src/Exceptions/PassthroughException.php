@@ -6,4 +6,4 @@
 
 namespace Hammock\Exceptions;
 
-class PassThroughException extends \Exception {}
+class PassthroughException extends \Exception {}

@@ -8,7 +8,7 @@
 
 namespace Hammock;
 
-use type Hammock\Exceptions\{HammockException, PassThroughException};
+use type Hammock\Exceptions\{HammockException, PassthroughException};
 use function Hammock\get_declaring_class_name;
 use namespace HH\Lib\{C, Dict, Str, Vec};
 use type Hammock\{InterceptedCall, MockCallback};
@@ -264,7 +264,7 @@ class MockManager {
 				$objectHash = self::hashObject($object);
 
 				if (!C\contains_key(self::$objectMethodMocks[$mockKey], $objectHash)) {
-					throw new PassThroughException();
+					throw new PassthroughException();
 				}
 
 				self::$objectMethodMocks[$mockKey][$objectHash]['calls'][] = shape(
@@ -364,7 +364,7 @@ class MockManager {
 
 					/* HH_IGNORE_ERROR[2050] */
 					return vec($args) |> $cb($object, $$);
-				} catch (PassThroughException $e) {
+				} catch (PassthroughException $e) {
 					// Pass through to the original, unmocked behavior.
 					$done = false;
 					return null;
