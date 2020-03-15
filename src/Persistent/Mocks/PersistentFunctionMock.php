@@ -52,6 +52,10 @@ abstract class PersistentFunctionMock implements IFunctionMock, IDeactivatable {
 		$this->isDeactivated = true;
 	}
 
+	public function isDeactivated(): bool {
+		return $this->isDeactivated;
+	}
+
 	protected function throwIfDeactivated(): void {
 		if ($this->isDeactivated) {
 			throw new HammockException(
