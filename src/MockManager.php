@@ -327,17 +327,10 @@ class MockManager {
 		return tuple($mockKey, $objectHash);
 	}
 
-	/**
-	 * @return mixed This function doesn't actually return anything.
-	 * It is just a work around since hh_client can't parse this function
-	 * in older hhvm versions.
-	 * You should ignore its return value.
-	 * It is always null.
-	 */
 	protected static function mock(
 		string $mockKey,
 		self::InternalMockCallback $callback,
-	): mixed {
+	): void {
 		fb_intercept_full(
 			$mockKey,
 			(
@@ -347,11 +340,6 @@ class MockManager {
 				mixed $cb,
 				Ref<bool> $done,
 			): mixed ==> {
-				// NOTE: The following 2 ignores should be unnecessary, but the
-				// type-checker trips out because of the last `&$done` parameter.
-				// Removing the comma after `&$done` fixes the issue, but then
-				// `hackfmt` automatically re-adds the comma and breaks it again.
-
 				// TODO: Use `$object is string`.
 				$object = \is_string($objectOrString) ? null : $objectOrString;
 				$previousObject = self::$currentObject;
@@ -359,8 +347,8 @@ class MockManager {
 				try {
 					self::$currentObject = $object;
 
-					/* HH_IGNORE_ERROR[2050] */
-					/* HH_IGNORE_ERROR[4009] */
+					/* HH_IGNORE_ERROR[2050] Cannot use `as`, `is` or `instanceof`*/
+					/* HH_IGNORE_ERROR[4009] Cannot use `as`, `is` or `instanceof`*/
 					return vec($args) |> $cb($object, $$);
 				} catch (PassThroughException $e) {
 					// Pass through to the original, unmocked behavior.
@@ -372,8 +360,6 @@ class MockManager {
 			},
 			$callback,
 		);
-
-		return null; /* void */
 	}
 
 	protected static function unmock(string $mockKey): void {
