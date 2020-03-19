@@ -9,6 +9,7 @@ use type Hammock\Persistent\Mocks\{PersistentFunctionMock};
 use function Facebook\FBExpect\expect;
 use function Hammock\Fixtures\return_input;
 use namespace Hammock\Persistent;
+use namespace HH\Lib\{C, Str};
 
 class PersistentTest extends HackTest {
 	<<__Override>>
@@ -327,6 +328,21 @@ class PersistentTest extends HackTest {
 		);
 	}
 
+	public function testMockRegistryPrune(): void {
+		$activatedMock = new MockDeactivatable();
+		MockPersistentMockRegistry::register($activatedMock);
+
+		for ($i = 0; $i < MockPersistentMockRegistry::REGISTRY_SOFT_LIMIT - 1; $i++) {
+			$deactivatedMock = new MockDeactivatable();
+			$deactivatedMock->deactivate();
+			MockPersistentMockRegistry::register($deactivatedMock);
+		}
+
+		$registry = MockPersistentMockRegistry::getRegistry();
+		expect(C\count($registry))->toBeSame(1);
+		expect($registry[0]->isDeactivated())->toBeSame(false);
+	}
+
 	// Subroutines.
 
 	private function mockClassMethod<T>(
@@ -376,5 +392,21 @@ class PersistentTest extends HackTest {
 
 	private function noopGlobalFunction(): PersistentFunctionMock {
 		return Persistent\noop_global_function('Hammock\Fixtures\return_input');
+	}
+}
+
+class MockPersistentMockRegistry extends Persistent\PersistentMockRegistry {
+	public static function getRegistry(): vec<Interfaces\IDeactivatable> {
+		return self::$registry;
+	}
+}
+
+class MockDeactivatable implements Interfaces\IDeactivatable {
+	private bool $isDeactivated = false;
+	public function deactivate(): void {
+		$this->isDeactivated = true;
+	}
+	public function isDeactivated(): bool {
+		return $this->isDeactivated;
 	}
 }
