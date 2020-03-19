@@ -10,8 +10,10 @@ namespace Hammock;
 
 use type Hammock\Exceptions\{HammockException, PassThroughException};
 use function Hammock\get_declaring_class_name;
+use function Quizlet\FBInterceptPolyfill\{fb_intercept_full, fb_intercept_zero};
 use namespace HH\Lib\{C, Dict, Str, Vec};
 use type Hammock\{InterceptedCall, MockCallback};
+use type HH\Lib\Ref;
 
 class MockManager {
 	const type InternalMockCallback = (function(mixed, vec<mixed>): mixed);
@@ -336,26 +338,21 @@ class MockManager {
 		string $mockKey,
 		self::InternalMockCallback $callback,
 	): mixed {
-		/* HH_FIXME[2049] This function is not in any hhi */
-		/* HH_FIXME[4107] This function is not in any hhi */
-		\fb_intercept(
+		fb_intercept_full(
 			$mockKey,
-			function(
+			(
 				string $_,
 				mixed $objectOrString,
 				array<mixed> $args,
-				self::InternalMockCallback $cb,
-				/* HH_IGNORE_ERROR[1002] */
-				/* HH_FIXME[2087] Don't use references!*/
-				bool &$done,
-			): mixed {
+				mixed $cb,
+				Ref<bool> $done,
+			): mixed ==> {
 				// NOTE: The following 2 ignores should be unnecessary, but the
 				// type-checker trips out because of the last `&$done` parameter.
 				// Removing the comma after `&$done` fixes the issue, but then
 				// `hackfmt` automatically re-adds the comma and breaks it again.
 
 				// TODO: Use `$object is string`.
-				/* HH_IGNORE_ERROR[2050] */
 				$object = \is_string($objectOrString) ? null : $objectOrString;
 				$previousObject = self::$currentObject;
 
@@ -363,10 +360,11 @@ class MockManager {
 					self::$currentObject = $object;
 
 					/* HH_IGNORE_ERROR[2050] */
+					/* HH_IGNORE_ERROR[4009] */
 					return vec($args) |> $cb($object, $$);
 				} catch (PassThroughException $e) {
 					// Pass through to the original, unmocked behavior.
-					$done = false;
+					$done->value = false;
 					return null;
 				} finally {
 					self::$currentObject = $previousObject;
@@ -379,9 +377,7 @@ class MockManager {
 	}
 
 	protected static function unmock(string $mockKey): void {
-		/* HH_FIXME[2049] This function is not in any hhi. */
-		/* HH_FIXME[4107] This function is not in any hhi. */
-		\fb_intercept($mockKey, null);
+		fb_intercept_zero($mockKey, null);
 	}
 
 	protected static function hashObject<T>(T $object): string {
