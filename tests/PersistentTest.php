@@ -4,7 +4,7 @@ namespace Hammock;
 
 use type Facebook\HackTest\HackTest;
 use type Hammock\Exceptions\HammockException;
-use type Hammock\Fixtures\{ChildClass, TestClass};
+use type Hammock\Fixtures\{ChildClass, TestClass, MockDeactivatable, MockPersistentMockRegistry};
 use type Hammock\Persistent\Mocks\{PersistentFunctionMock};
 use function Facebook\FBExpect\expect;
 use function Hammock\Fixtures\return_input;
@@ -392,21 +392,5 @@ class PersistentTest extends HackTest {
 
 	private function noopGlobalFunction(): PersistentFunctionMock {
 		return Persistent\noop_global_function('Hammock\Fixtures\return_input');
-	}
-}
-
-class MockPersistentMockRegistry extends Persistent\PersistentMockRegistry {
-	public static function getRegistry(): vec<Interfaces\IDeactivatable> {
-		return self::$registry;
-	}
-}
-
-class MockDeactivatable implements Interfaces\IDeactivatable {
-	private bool $isDeactivated = false;
-	public function deactivate(): void {
-		$this->isDeactivated = true;
-	}
-	public function isDeactivated(): bool {
-		return $this->isDeactivated;
 	}
 }
