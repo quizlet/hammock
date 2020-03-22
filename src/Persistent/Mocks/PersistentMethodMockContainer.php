@@ -59,4 +59,8 @@ abstract class PersistentMethodMockContainer
 
 		$this->methodMocks = dict[];
 	}
+
+	public function isDeactivated(): bool {
+		return $this->isDeactivated;
+	}
 }
