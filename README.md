@@ -79,6 +79,8 @@ $fetchSpy()->getNumCalls() === 1; // true
 
 The full API documentation can be found in [MAIN_API.md](https://github.com/quizlet/hammock/blob/master/MAIN_API.md).
 
+Advanced use cases can be found in [ADVANCED.md](https://github.com/quizlet/hammock/blob/master/ADVANCED.md).
+
 # Contributing
 
 If you ever wanted to contribute to an open-source project, now is the chance! Please read [CONTRIBUTING.md](https://github.com/quizlet/hammock/blob/master/CONTRIBUTING.md) to understand the process for submitting a pull request.

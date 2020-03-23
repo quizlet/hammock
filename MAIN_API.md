@@ -14,6 +14,8 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 - Spies are useful when trying to track the calls into a function without affecting its behavior.
 - No-ops are useful when trying to override a function's behavior with no-op.
 
+To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_API.md](https://github.com/quizlet/hammock/blob/master/PERSISTENT_API.md).
+
 - `Hammock\mock_class`
 	- Creates a method mock container for a class.
 	- `@param classname<T> $className`
