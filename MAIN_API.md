@@ -173,7 +173,7 @@ To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_AP
 		$alice = new User('Alice');
 		$bob = new User('Bob');
 
-		using getNameSpy = Hammock\spy_object_method($alice, 'getName');
+		using $getNameSpy = Hammock\spy_object_method($alice, 'getName');
 
 		$alice->getName() === 'Alice'; // true
 		$bob->getName() === 'Bob'; // true
@@ -210,7 +210,7 @@ To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_AP
 		$alice = new User('Alice');
 		$bob = new User('Bob');
 
-		using getNameNoop = Hammock\noop_class_method(User::class, 'getName');
+		using $getNameNoop = Hammock\noop_class_method(User::class, 'getName');
 
 		$alice->getName() === null; // true
 		$bob->getName() === null; // true
@@ -231,7 +231,7 @@ To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_AP
 		$alice = new User('Alice');
 		$bob = new User('Bob');
 
-		using getNameNoop = Hammock\noop_object_method($alice, 'getName');
+		using $getNameNoop = Hammock\noop_object_method($alice, 'getName');
 
 		$alice->getName() === null; // true
 		$bob->getName() === 'Bob'; // true

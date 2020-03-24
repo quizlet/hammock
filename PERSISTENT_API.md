@@ -1,6 +1,6 @@
 # Overview
 
-The persistent API is very similar to the main API, but the returned interfaces are not disposable. This means that the `using` keyword is omitted, and the resulting mocks are not automatically cleaned up at the end of the block scope. The persistent API is especially useful for repeatedly creating the same mocks during test setup. Because these mocks will not be cleaned up at the end of the setup, the mocked behavior may be shared across many different tests. However, this means that the persistent mocks have to be cleaned up manually, preferably during teardown. Otherwise, there could be a memory leak.
+The persistent API is very similar to the main API, but the returned interfaces are not disposable. This means that the `using` keyword is omitted, and the resulting mocks are not automatically cleaned up at the end of the block scope. The persistent API is especially useful for repeatedly creating the same mocks during test setup. Because these mocks will not be cleaned up at the end of the setup, the mocked behavior may be shared across many different tests. However, this means that the persistent mocks have to be cleaned up manually, preferably during teardown. Otherwise, there could be a memory leak as the mock will persist until the end of the request / CLI invocation. This could also lead to some very confusing errors.
 
 ```hack
 class UserTest extends HackTest {
