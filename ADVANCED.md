@@ -11,7 +11,7 @@ square(2) === 4; // true
 square(3) === 9; // true
 
 using Hammock\mock_global_function('square', $args ==> {
-	$arg = $args[0];
+	$arg = intval($args[0]);
 
 	if ($arg % 2 === 0) {
 		// Default to the original behavior for even numbers.

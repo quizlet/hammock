@@ -45,6 +45,7 @@ $dog = new Dog();
 
 using $fetchMock = Hammock\mock_object_method($dog, 'fetch', $args ==> {
 	// Each intercepted argument must be type-asserted.
+	// We recommend https://github.com/hhvm/type-assert for this.
 	$arg = strval($args[0]);
 
 	if ($arg === 'ball') {
