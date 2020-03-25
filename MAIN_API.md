@@ -215,7 +215,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		$alice->getName() === null; // true
 		$bob->getName() === null; // true
 
-		$getNameNoop->getNumCalls() === 1; // true
+		$getNameNoop->getNumCalls() === 2; // true
 		```
 
 		</p></details>
