@@ -6,6 +6,8 @@ Hammock also distinguishes between _class-level_ mocks and _object-level_ mocks.
 
 By virtue of using `fb_intercept`, Hammock is able to override the behavior of functions at runtime. Rather than creating a mock object that looks and feels the same as a real object, Hammock creates a mock object that _accompanies_ the real object. For the lifespan of the mock object (which ends at the end of the block), the real object's behavior is overridden.
 
+To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_API.md](https://github.com/quizlet/hammock/blob/master/PERSISTENT_API.md).
+
 # Top-level API
 
 Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-ops all provide the same interface, but each one has a unique purpose:
@@ -13,8 +15,6 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 - Mocks are useful when trying to override a function's behavior with a stub, as well as track the calls into the overridden function.
 - Spies are useful when trying to track the calls into a function without affecting its behavior.
 - No-ops are useful when trying to override a function's behavior with no-op.
-
-To gain more control over when the mocks get cleaned up, refer to [PERSISTENT_API.md](https://github.com/quizlet/hammock/blob/master/PERSISTENT_API.md).
 
 - `Hammock\mock_class`
 	- Creates a method mock container for a class.
