@@ -90,7 +90,7 @@ For most of the persistent API, examples are unnecessary as the disposable equiv
 - `Hammock\Persistent\deactivate_all_persistent_mocks`
 	- Deactivates all persistent mocks that were created. It generally makes sense to call this at the beginning of setup or during teardown.
 	- `@return void`
-	-	<details><summary>Example</summary><p>
+	-	<details><summary style="color: #3ccfcf">Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -136,7 +136,7 @@ For most of the persistent API, examples are unnecessary as the disposable equiv
 	- `deactivate`
 		- Deactivates the persistent method mock container, putting it up for garbage collection and restoring the original behavior.
 		- `@return void`
-		- <details><summary>Example</summary><p>
+		- <details><summary style="color: #3ccfcf">Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -157,7 +157,7 @@ For most of the persistent API, examples are unnecessary as the disposable equiv
 	- `isDeactivated`
 		- Returns a boolean of whether the persistent method mock container has been deactivated.
 		- `@return bool`
-		- <details><summary>Example</summary><p>
+		- <details><summary style="color: #3ccfcf">Example</summary><p>
 
 			```hack
 			$alice = newUser('Alice');
@@ -187,7 +187,7 @@ For most of the persistent API, examples are unnecessary as the disposable equiv
 	- `deactivate`
 		- Deactivates the persistent function mock, putting it up for garbage collection and restoring the original behavior.
 		- `@return void`
-		- <details><summary>Example</summary><p>
+		- <details><summary style="color: #3ccfcf">Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -207,7 +207,7 @@ For most of the persistent API, examples are unnecessary as the disposable equiv
 	- `isDeactivated`
 		- Returns a boolean of whether the persistent function mock has been deactivated.
 		- `@return bool`
-		- <details><summary>Example</summary><p>
+		- <details><summary style="color: #3ccfcf">Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
