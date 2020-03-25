@@ -27,7 +27,7 @@ abstract class PersistentMethodMockContainer
 	public function mockMethod(
 		string $methodName,
 		MockCallback $callback,
-	): PersistentFunctionMock {
+	): IFunctionMock {
 		$methodMock = $this->createMethodMock($methodName, $callback);
 		$this->methodMocks[$methodName] = $methodMock;
 
