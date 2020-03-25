@@ -20,7 +20,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- Creates a method mock container for a class.
 	- `@param classname<T> $className`
 	- `@return MethodMockContainer`
-	-	<details><summary style="color: #3ccfcf">Example</summary><p>
+	-	<details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -55,7 +55,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- Creates a method mock container for an object.
 	- `@param T $object`
 	- `@return MethodMockContainer`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		// Create instances of an unmocked class.
@@ -82,7 +82,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param string $methodName`
 	- `@param MockCallback $callback`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -105,7 +105,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param string $methodName`
 	- `@param MockCallback $callback`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -127,7 +127,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param string $globalFunctionName`
 	- `@param MockCallback $callback`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -146,7 +146,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param classname<T> $className`
 	- `@param string $methodName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -167,7 +167,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param T $object`
 	- `@param string $methodName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -187,7 +187,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- Creates a function spy that does not change the global function behavior but still tracks all of the calls.
 	- `@param string $globalFunctionName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		using $getUserByIdSpy = Hammock\spy_global_function('get_user_by_id');
@@ -204,7 +204,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param classname<T> $className`
 	- `@param string $methodName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -225,7 +225,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `@param T $object`
 	- `@param string $methodName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -245,7 +245,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- Creates a function mock that overrides the global function behavior with no-op.
 	- `@param string $globalFunctionName`
 	- `@return FunctionMock`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		using $getUserByIdNoop = Hammock\noop_global_function('get_user_by_id');
@@ -260,7 +260,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 - `Hammock\this`
 	- When called inside a class or object method mock callback, returns the object on which the method is being called. It is useful for mocking fluent methods, since `$this` will point to something other than the object that should be returned. This function throws if called anywhere outside a class or object method mock callback.
 	- `@return mixed`
-	- <details><summary style="color: #3ccfcf">Example</summary><p>
+	- <details><summary>Example</summary><p>
 
 		```hack
 		$alice = new User('Alice');
@@ -285,7 +285,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		- `@param string $methodName`
 		- `@param MockCallback $callback`
 		- `@return IFunctionMock`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -304,7 +304,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		- Creates a function spy that does not change the method behavior but still tracks all of the calls.
 		- `@param string $methodName`
 		- `@return IFunctionMock`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -323,7 +323,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		- Creates a function mock that overrides the method behavior with no-op.
 		- `@param string $methodName`
 		- `@return IFunctionMock`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -342,7 +342,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		- Gets a function mock/spy/noop for a method.
 		- `@param string $methodName`
 		- `@return IFunctionMock`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -363,7 +363,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 	- `getNumCalls`
 		- Gets the number of calls to the mocked function.
 		- `@return int`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			$alice = new User('Alice');
@@ -383,7 +383,7 @@ Hammock provides APIs for mocking, spying, and "no-oping". Mocks, spies, and no-
 		- Gets the vector of arguments from the i-th call to the mocked function.
 		- `@param int $i`
 		- `@return vec<mixed>`
-		- <details><summary style="color: #3ccfcf">Example</summary><p>
+		- <details><summary>Example</summary><p>
 
 			```hack
 			using $getByIdSpy = Hammock\spy_class_method(User::class, 'getById');
