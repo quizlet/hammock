@@ -10,6 +10,8 @@ php --version
   curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 )
 
+composer config -g github-oauth.github.com "$GITHUB_TOKEN"
+
 canruntests=$(hhvm --php -r "echo HHVM_VERSION_ID >= 32800 ? 'yes' : 'no';")
 if [ "$canruntests" = "yes" ]; then
   rm composer.json
