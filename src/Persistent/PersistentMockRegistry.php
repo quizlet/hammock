@@ -20,9 +20,11 @@ class PersistentMockRegistry {
 		//
 		// If the number of items in the registry drops below REGISTRY_SOFT_LIMIT,
 		// the number of attempts is reset to zero.
-		if (C\count(self::$registry) >= self::REGISTRY_SOFT_LIMIT &&
-			  self::$pruneAttempts % self::PRUNE_INTERVAL == 0) {
-			self::$registry = Vec\filter(self::$registry, $mock ==> !$mock->isDeactivated());
+		if (C\count(self::$registry) >= self::REGISTRY_SOFT_LIMIT) {
+			if (self::$pruneAttempts % self::PRUNE_INTERVAL == 0) {
+				self::$registry = Vec\filter(self::$registry, $mock ==> !$mock->isDeactivated());
+			}
+
 			self::$pruneAttempts += 1;
 		} else {
 			self::$pruneAttempts = 0;
