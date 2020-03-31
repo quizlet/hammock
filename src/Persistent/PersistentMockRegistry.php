@@ -6,8 +6,8 @@ use namespace HH\Lib\{C, Vec};
 use type Hammock\Interfaces\IDeactivatable;
 
 class PersistentMockRegistry {
-	const REGISTRY_SOFT_LIMIT = 100;
-	const PRUNE_INTERVAL = 10;
+	const int REGISTRY_SOFT_LIMIT = 100;
+	const int PRUNE_INTERVAL = 10;
 	protected static vec<IDeactivatable> $registry = vec[];
 	protected static int $pruneAttempts = 0;
 
