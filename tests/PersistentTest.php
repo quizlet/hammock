@@ -4,11 +4,12 @@ namespace Hammock;
 
 use type Facebook\HackTest\HackTest;
 use type Hammock\Exceptions\HammockException;
-use type Hammock\Fixtures\{ChildClass, TestClass};
+use type Hammock\Fixtures\{ChildClass, TestClass, MockDeactivatable, MockPersistentMockRegistry};
 use type Hammock\Persistent\Mocks\{PersistentFunctionMock};
 use function Facebook\FBExpect\expect;
 use function Hammock\Fixtures\return_input;
 use namespace Hammock\Persistent;
+use namespace HH\Lib\{C, Str};
 
 class PersistentTest extends HackTest {
 	<<__Override>>
@@ -325,6 +326,21 @@ class PersistentTest extends HackTest {
 			HammockException::class,
 			"Hammock\Fixtures\ChildClass::returnInput` is declared in `Hammock\Fixtures\TestClass`. Please use `Hammock\Fixtures\TestClass::returnInput` instead.",
 		);
+	}
+
+	public function testMockRegistryPrune(): void {
+		$activatedMock = new MockDeactivatable();
+		MockPersistentMockRegistry::register($activatedMock);
+
+		for ($i = 0; $i < MockPersistentMockRegistry::REGISTRY_SOFT_LIMIT - 1; $i++) {
+			$deactivatedMock = new MockDeactivatable();
+			$deactivatedMock->deactivate();
+			MockPersistentMockRegistry::register($deactivatedMock);
+		}
+
+		$registry = MockPersistentMockRegistry::getRegistry();
+		expect(C\count($registry))->toBeSame(1);
+		expect($registry[0]->isDeactivated())->toBeSame(false);
 	}
 
 	// Subroutines.
