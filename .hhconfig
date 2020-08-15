@@ -1,2 +1,4 @@
 assume_php = true
 hackfmt.tabs = true
+allowed_decl_fixme_codes=2053,4047
+allowed_fixme_codes_strict=2011,2049,2050,2053,4009,4027,4047,4104,4107,4108,4110,4128,4135,4188,4240,4323

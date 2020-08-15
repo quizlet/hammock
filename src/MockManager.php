@@ -336,7 +336,7 @@ class MockManager {
 			(
 				string $_,
 				mixed $objectOrString,
-				array<mixed> $args,
+				varray<mixed> $args,
 				mixed $cb,
 				Ref<bool> $done,
 			): mixed ==> {
