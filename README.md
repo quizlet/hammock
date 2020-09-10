@@ -75,7 +75,7 @@ using $fetchSpy = Hammock\spy_object_method($dog, 'fetch');
 
 $dog->fetch('ball') === 'ball'; // true
 
-$fetchSpy()->getNumCalls() === 1; // true
+$fetchSpy->getNumCalls() === 1; // true
 ```
 
 The full API documentation can be found in [MAIN_API.md](https://github.com/quizlet/hammock/blob/master/MAIN_API.md).
