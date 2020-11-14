@@ -1,13 +1,11 @@
 #!/bin/sh
 set -ex
-apt update -y
-DEBIAN_FRONTEND=noninteractive apt install -y php-cli zip unzip
 hhvm --version
 php --version
 
 (
   cd $(mktemp -d)
-  curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.17
 )
 
 canruntests=$(hhvm --php -r "echo HHVM_VERSION_ID >= 32800 ? 'yes' : 'no';")
