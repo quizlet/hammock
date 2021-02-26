@@ -4,7 +4,7 @@ Here are some advanced use cases for Hammock.
 
 # Passing through to the original behavior
 
-In order to pass through to the original function behavior within the mock callback, throw the `PassthroughException`:
+In order to pass through to the original function behavior within the mock callback, throw the `PassThroughException`:
 
 ```hack
 square(2) === 4; // true
@@ -15,7 +15,7 @@ using Hammock\mock_global_function('square', $args ==> {
 
 	if ($arg % 2 === 0) {
 		// Default to the original behavior for even numbers.
-		throw new Hammock\Exceptions\PassthroughException();
+		throw new Hammock\Exceptions\PassThroughException();
 	}
 
 	// Return 0 for odd numbers.
