@@ -78,6 +78,15 @@ $dog->fetch('ball') === 'ball'; // true
 $fetchSpy->getNumCalls() === 1; // true
 ```
 
+Mock a class' method when no instance is available:
+
+```hack
+using Hammock\mock_class_method(Ball::class, 'bounce', $args ==> false);
+
+Ball::bounce() === false; // true
+```
+
+
 The full API documentation can be found in [MAIN_API.md](https://github.com/quizlet/hammock/blob/master/MAIN_API.md).
 
 Advanced use cases can be found in [ADVANCED.md](https://github.com/quizlet/hammock/blob/master/ADVANCED.md).
@@ -98,7 +107,9 @@ Thanks to the following people who have contributed to Hammock:
 - [Shaobo Sun](https://github.com/shaobos)
 - [Turadg Aleahmad](https://github.com/turadg)
 - [Sean Young](https://github.com/syoung-quizlet)
+- [Chris Opperwall](https://github.com/copperwall)
+
 
 # Contact
 
-Please reach out to tyron.jung@quizlet.com or riya.dashoriya@quizlet.com if you have any questions.
+Please reach out to riya.dashoriya@quizlet.com if you have any questions.
