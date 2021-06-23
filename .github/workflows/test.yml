@@ -1,0 +1,47 @@
+name: Test
+"on":
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        HHVM_VERSION:
+          - 3.27-lts-latest
+          - 3.28.3
+          - 3.29-latest
+          - 3.30-latest
+          - 4.0-latest
+          - 4.4-latest
+          - 4.8-latest
+          - 4.16-latest
+          - 4.25-latest
+          - 4.26-latest
+          - 4.32-latest
+          - 4.40-latest
+          - 4.48-latest
+          - 4.56-latest
+          - 4.64-latest
+          # version 4.70 was skipped, testing on hhvm 4.69 instead
+          - 4.69-latest
+          - latest
+          - nightly
+    container:
+      image: "hhvm/hhvm:${{ matrix.HHVM_VERSION }}"
+    steps:  
+    - name: Download latest git
+      # This is necessary to make sure the git command in the docker image is at least version 2.18.
+      # Some older hhvm/hhvm:$version images have old versions of git and the actions/checkout action
+      # downloads the repo archive over HTTP in that case. This breaks CI because the test
+      # directory is excluded in HTTP archives in order to make the composer package size smaller by not
+      # including unnecessary files.
+      run: "add-apt-repository ppa:git-core/ppa && apt-get update && apt-get install -y git"
+    - uses: actions/checkout@v2
+    - name: Tests
+      run: ./ci_entrypoint.sh
